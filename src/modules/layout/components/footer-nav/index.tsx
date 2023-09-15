@@ -3,7 +3,6 @@
 import clsx from "clsx"
 import { useCollections } from "medusa-react"
 import Link from "next/link"
-import CountrySelect from "../country-select"
 
 const FooterNav = () => {
   const { collections } = useCollections()
@@ -13,7 +12,7 @@ const FooterNav = () => {
       <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between">
         <div>
           <Link href="/" className="text-xl-semi uppercase">
-            Acme
+            Y&Z Deco
           </Link>
         </div>
         <div className="text-small-regular grid grid-cols-2 gap-x-16">
@@ -69,9 +68,6 @@ const FooterNav = () => {
         <span className="text-xsmall-regular text-gray-500">
           © Copyright 2022 ACME
         </span>
-        <div className="min-w-[316px] flex xsmall:justify-end">
-          <CountrySelect />
-        </div>
       </div>
     </div>
   )
