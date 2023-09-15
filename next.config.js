@@ -12,6 +12,8 @@ module.exports = withStoreConfig({
     domains: [
       "medusa-public-images.s3.eu-west-1.amazonaws.com",
       "localhost",
+      "database",
+      "backend",
       "medusa-server-testing.s3.amazonaws.com",
     ],
   },
