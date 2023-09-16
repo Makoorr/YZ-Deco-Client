@@ -36,7 +36,7 @@ const MainMenu = () => {
           </button>
         </div>
         <div>
-          <h1 className="text-xl-semi uppercase">Acme</h1>
+          <h1 className="text-xl-semi uppercase">Y&Z Deco</h1>
         </div>
         <div className="flex-1 basis-0 flex justify-end">
           <button onClick={close}>
@@ -52,8 +52,8 @@ const MainMenu = () => {
             onClick={setScreenSearch}
           >
             <Search size={24} />
-            <span placeholder="Search products" className="text-base-regular">
-              Search products
+            <span placeholder="Recherche de produits" className="text-base-regular">
+              Recherche de produits
             </span>
           </button>
         )}
@@ -66,7 +66,7 @@ const MainMenu = () => {
                   className="flex items-center justify-between w-full"
                   onClick={close}
                 >
-                  <span className="sr-only">Go to Store</span>
+                  <span className="sr-only">Aller au magasin</span>
                   <span>Store</span>
                   <ChevronDown className="-rotate-90" />
                 </button>
