@@ -49,28 +49,27 @@ const Register = () => {
           <Spinner size={24} />
         </div>
       )}
-      <h1 className="text-large-semi uppercase mb-6">Become a Acme Member</h1>
+      <h1 className="text-large-semi uppercase mb-6">Devenir membre de Y&Z Deco</h1>
       <p className="text-center text-base-regular text-gray-700 mb-4">
-        Create your Acme Member profile, and get access to an enhanced shopping
-        experience.
+      Créez votre profil et accédez à une expérience d&apos;achat améliorée.
       </p>
       <form className="w-full flex flex-col" onSubmit={onSubmit}>
         <div className="flex flex-col w-full gap-y-2">
           <Input
-            label="First name"
-            {...register("first_name", { required: "First name is required" })}
+            label="Prénom"
+            {...register("first_name", { required: "Prénom est requis" })}
             autoComplete="given-name"
             errors={errors}
           />
           <Input
-            label="Last name"
-            {...register("last_name", { required: "Last name is required" })}
+            label="Nom"
+            {...register("last_name", { required: "Nom est requis" })}
             autoComplete="family-name"
             errors={errors}
           />
           <Input
             label="Email"
-            {...register("email", { required: "Email is required" })}
+            {...register("email", { required: "Email est requis" })}
             autoComplete="email"
             errors={errors}
           />
@@ -81,9 +80,9 @@ const Register = () => {
             errors={errors}
           />
           <Input
-            label="Password"
+            label="Mot de passe"
             {...register("password", {
-              required: "Password is required",
+              required: "Mot de passe est requis",
             })}
             type="password"
             autoComplete="new-password"
@@ -93,30 +92,30 @@ const Register = () => {
         {authError && (
           <div>
             <span className="text-rose-500 w-full text-small-regular">
-              These credentials do not match our records
+              Veuillez vérifier vos coordonnées
             </span>
           </div>
         )}
         <span className="text-center text-gray-700 text-small-regular mt-6">
-          By creating an account, you agree to Acme&apos;s{" "}
+          En créant un compte, vous acceptez{" "}
           <Link href="/content/privacy-policy" className="underline">
-            Privacy Policy
+          les conditions d&apos;utilisation
           </Link>{" "}
-          and{" "}
+          et notre {" "}
           <Link href="/content/terms-of-use" className="underline">
-            Terms of Use
-          </Link>
-          .
+          politique de confidentialité
+          </Link> {" "}
+          de Y&Z Deco.
         </span>
-        <Button className="mt-6">Join</Button>
+        <Button className="mt-6">Rejoignez-nous</Button>
       </form>
       <span className="text-center text-gray-700 text-small-regular mt-6">
-        Already a member?{" "}
+        Déjà membre?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
           className="underline"
         >
-          Sign in
+          Se connecter
         </button>
         .
       </span>

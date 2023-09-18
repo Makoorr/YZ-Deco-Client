@@ -24,7 +24,7 @@ const ShippingDetails = ({
         </div>
       </div>
       <div className="my-2">
-        <h3 className="text-small-regular text-gray-700">Delivery method</h3>
+        <h3 className="text-small-regular text-gray-700">Méthode de livraison</h3>
         <div>
           {shippingMethods.map((sm) => {
             return <div key={sm.id}>{sm.shipping_option.name}</div>

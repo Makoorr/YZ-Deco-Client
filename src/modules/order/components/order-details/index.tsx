@@ -17,7 +17,7 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
   return (
     <div className="p-10 border-b border.gray-200">
       <span className="text-gray-700 text-small-regular uppercase">
-        Thank you, your order was successfully placed
+        Votre commande a bien été passée.
       </span>
       <h1 className="mt-2 uppercase text-2xl-semi">#{order.display_id}</h1>
       <span>{order.id.split("order_")[1]}</span>

@@ -32,15 +32,14 @@ const AccountLayout: React.FC = ({ children }) => {
         </div>
         <div className="flex flex-col small:flex-row items-end justify-between small:border-t border-gray-200 px-8 py-12 gap-x-8">
           <div>
-            <h3 className="text-xl-semi mb-4">Got questions?</h3>
+            <h3 className="text-xl-semi mb-4">Vous avez des questions?</h3>
             <span className="text-small-regular">
-              You can find frequently asked questions and answers on our
-              customer service page.
+            Vous pouvez trouver les questions et réponses fréquemment posées sur notre page de service client.
             </span>
           </div>
           <div>
             <UnderlineLink href="/customer-service">
-              Customer Service
+              Service Client
             </UnderlineLink>
           </div>
         </div>

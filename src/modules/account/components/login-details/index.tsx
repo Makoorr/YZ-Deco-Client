@@ -16,7 +16,7 @@ const LoginDetails: React.FC<LoginDetailsProps> = ({ customer }) => {
           <span>{customer.email}</span>
           <EditEmailModal customer={customer} />
         </Detail.SubDetail>
-        <Detail.SubDetail title="Password">
+        <Detail.SubDetail title="Mot de passe">
           <span>•••••••••••</span>
           <EditPasswordModal customer={customer} />
         </Detail.SubDetail>

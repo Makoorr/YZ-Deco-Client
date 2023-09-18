@@ -60,13 +60,13 @@ const OrderCard = ({ order }: OrderCardProps) => {
             <span className="text-small-regular text-gray-700">
               + {numberOfLines - 4}
             </span>
-            <span className="text-small-regular text-gray-700">more</span>
+            <span className="text-small-regular text-gray-700">plus</span>
           </div>
         )}
       </div>
       <div className="flex justify-end">
         <Link href={`/order/details/${order.id}`}>
-          <Button variant="secondary">See details</Button>
+          <Button variant="secondary">Voir détails</Button>
         </Link>
       </div>
     </div>

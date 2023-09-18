@@ -44,7 +44,7 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
 
     if (data.email === customer.email) {
       setSubmitting(false)
-      setError("You must enter a new email.")
+      setError("Vous devez saisir votre email.")
       return
     }
 
@@ -58,7 +58,7 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
         },
         onError: () => {
           setSubmitting(false)
-          setError("Unable to update email, try again later.")
+          setError("Erreur de mise à jour.")
         },
       }
     )
@@ -68,16 +68,16 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
     <div>
       <EditButton onClick={open} />
       <Modal isOpen={state} close={close}>
-        <Modal.Title>Edit your email</Modal.Title>
+        <Modal.Title>Modifier votre email</Modal.Title>
         <Modal.Body>
           <div className="flex flex-col w-full">
             <Input
               label="Email"
               {...register("email", {
-                required: "Email is required",
+                required: "Email requis",
                 pattern: {
                   value: emailRegex,
-                  message: "Must be a valid email",
+                  message: "Email doit être valide",
                 },
               })}
               errors={errors}
@@ -92,10 +92,10 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
             className="!bg-gray-200 !text-gray-900 !border-gray-200 min-h-0"
             onClick={close}
           >
-            Cancel
+            Annuler
           </Button>
           <Button className="min-h-0" onClick={submit} disabled={submitting}>
-            Save
+            Enregistrer
             {submitting && <Spinner />}
           </Button>
         </Modal.Footer>

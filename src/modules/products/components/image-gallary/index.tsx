@@ -32,7 +32,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 handleScrollTo(image.id)
               }}
             >
-              <span className="sr-only">Go to image {index + 1}</span>
+              <span className="sr-only">Accéder l&apos;image {index + 1}</span>
               <Image
                 src={image.url}
                 className="absolute inset-0"

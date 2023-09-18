@@ -19,9 +19,7 @@ const ProfileTemplate = () => {
       <div className="mb-8 flex flex-col gap-y-4">
         <h1 className="text-2xl-semi">Profile</h1>
         <p className="text-base-regular">
-          View and update your profile information, including your name, email,
-          and phone number. You can also update your billing address, or change
-          your password.
+        Affichez et mettez à jour les informations de votre profil, y compris votre nom, votre adresse e-mail et votre numéro de téléphone. Vous pouvez également mettre à jour votre adresse de facturation ou modifier votre mot de passe.
         </p>
       </div>
       <div className="flex flex-col gap-y-8 w-full">

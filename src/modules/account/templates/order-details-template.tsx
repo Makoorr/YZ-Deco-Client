@@ -12,7 +12,7 @@ const OrderDetailsTemplate = () => {
   })
 
   if (isLoading || !details) {
-    return <div>Loading...</div>
+    return <div>Chargement...</div>
   }
 
   return <OrderCompletedTemplate order={details} />

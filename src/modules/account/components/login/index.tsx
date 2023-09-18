@@ -45,21 +45,21 @@ const Login = () => {
           <Spinner size={24} />
         </div>
       )}
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
+      <h1 className="text-large-semi uppercase mb-6">Bienvenue</h1>
       <p className="text-center text-base-regular text-gray-700 mb-8">
-        Sign in to access an enhanced shopping experience.
+      Connectez-vous pour accéder à une expérience d&apos;achat améliorée.
       </p>
       <form className="w-full" onSubmit={onSubmit}>
         <div className="flex flex-col w-full gap-y-2">
           <Input
             label="Email"
-            {...register("email", { required: "Email is required" })}
+            {...register("email", { required: "Email est requis" })}
             autoComplete="email"
             errors={errors}
           />
           <Input
-            label="Password"
-            {...register("password", { required: "Password is required" })}
+            label="Mot de passe"
+            {...register("password", { required: "Mot de passe est requis" })}
             type="password"
             autoComplete="current-password"
             errors={errors}
@@ -68,19 +68,19 @@ const Login = () => {
         {authError && (
           <div>
             <span className="text-rose-500 w-full text-small-regular">
-              These credentials do not match our records
+            Veuillez vérifier vos informations.
             </span>
           </div>
         )}
-        <Button className="mt-6">Enter</Button>
+        <Button className="mt-6">Envoyer</Button>
       </form>
       <span className="text-center text-gray-700 text-small-regular mt-6">
-        Not a member?{" "}
+        Pas encore membre?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
           className="underline"
         >
-          Join us
+          Rejoignez-nous
         </button>
         .
       </span>

@@ -6,10 +6,10 @@ const Hero = () => {
     <div className="h-[60vh] w-full relative">
       <div className="text-white absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:text-left small:justify-end small:items-start small:p-32">
         <h1 className="text-2xl-semi mb-4 drop-shadow-md shadow-black">
-        Présentation des derniers styles d'été
+        Présentation des derniers styles d&apos;été
         </h1>
         <p className="text-base-regular max-w-[32rem] mb-6 drop-shadow-md shadow-black">
-        Cette saison, notre nouvelle collection d'été comprend des modèles qui offrent confort et style, vous assurant d'être bien préparé pour tout ce qui vous attend.
+        Cette saison, notre nouvelle collection d&apos;été comprend des modèles qui offrent confort et style, vous assurant d&apos;être bien préparé pour tout ce qui vous attend.
         </p>
         <UnderlineLink href="/store">Explorer nos produits</UnderlineLink>
       </div>

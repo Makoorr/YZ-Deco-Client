@@ -101,7 +101,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({ customer }) => {
 
   const currentInfo = useMemo(() => {
     if (!customer.billing_address) {
-      return "No billing address"
+      return "Aucune adresse de facturation"
     }
 
     const country =
@@ -138,7 +138,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({ customer }) => {
       className="w-full"
     >
       <AccountInfo
-        label="Billing address"
+        label="Adresse de facturation"
         currentInfo={currentInfo}
         isLoading={isLoading}
         isSuccess={isSuccess}
@@ -148,7 +148,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({ customer }) => {
         <div className="grid grid-cols-1 gap-y-2">
           <div className="grid grid-cols-2 gap-x-2">
             <Input
-              label="First name"
+              label="Prénom"
               {...register("billing_address.first_name", {
                 required: true,
               })}
@@ -156,39 +156,39 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({ customer }) => {
               errors={errors}
             />
             <Input
-              label="Last name"
+              label="Nom"
               {...register("billing_address.last_name", { required: true })}
               defaultValue={lastName}
               errors={errors}
             />
           </div>
           <Input
-            label="Company"
+            label="Entreprise"
             {...register("billing_address.company")}
             defaultValue={company}
             errors={errors}
           />
           <Input
-            label="Address"
+            label="Adresse"
             {...register("billing_address.address_1", { required: true })}
             defaultValue={address1}
             errors={errors}
           />
           <Input
-            label="Apartment, suite, etc."
+            label="Appartement, suite, etc."
             {...register("billing_address.address_2")}
             defaultValue={address2}
             errors={errors}
           />
           <div className="grid grid-cols-[144px_1fr] gap-x-2">
             <Input
-              label="Postal code"
+              label="Code postal"
               {...register("billing_address.postal_code", { required: true })}
               defaultValue={postalCode}
               errors={errors}
             />
             <Input
-              label="City"
+              label="Ville"
               {...register("billing_address.city", { required: true })}
               defaultValue={city}
               errors={errors}
