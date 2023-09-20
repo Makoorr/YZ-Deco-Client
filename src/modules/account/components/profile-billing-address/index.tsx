@@ -163,7 +163,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({ customer }) => {
             />
           </div>
           <Input
-            label="Entreprise"
+            label="Etablissement"
             {...register("billing_address.company")}
             defaultValue={company}
             errors={errors}

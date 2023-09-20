@@ -44,7 +44,7 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
 
     if (data.email === customer.email) {
       setSubmitting(false)
-      setError("Vous devez saisir votre email.")
+      setError("Veuillez saisir votre email.")
       return
     }
 

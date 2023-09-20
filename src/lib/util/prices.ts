@@ -79,5 +79,5 @@ export const findCheapestPrice = (variants: Variant[], region: Region) => {
       // if we can't find any price that matches the current region,
       // either by id or currency, then the product is not available in
       // the current region
-      return "Not available in your region"
+      return "Pas disponible dans votre région."
 }

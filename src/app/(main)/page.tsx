@@ -3,9 +3,9 @@ import Hero from "@modules/home/components/hero"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Acceuil",
   description:
-    "Shop all available models only at the Y&Z.",
+    "Chez Y&Z Deco, trouvez des idées de cadeaux pour la maison, des cadeaux pour elle, des cadeaux pour lui et des cadeaux pour les enfants.",
 }
 
 const Home = () => {

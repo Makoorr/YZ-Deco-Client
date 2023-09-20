@@ -23,7 +23,7 @@ const Register = () => {
   const router = useRouter()
 
   const handleError = (e: Error) => {
-    setAuthError("An error occured. Please try again.")
+    setAuthError("Veuillez vérifier vos coordonnées.")
   }
 
   const {

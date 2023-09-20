@@ -86,7 +86,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
       })
       .catch(() => {
         setSubmitting(false)
-        setError("Failed to update address, please try again.")
+        setError("Erreur lors de la mise à jour de l'adresse.")
       })
   })
 
@@ -153,25 +153,25 @@ const EditAddress: React.FC<EditAddressProps> = ({
           <div className="grid grid-cols-1 gap-y-2">
             <div className="grid grid-cols-2 gap-x-2">
               <Input
-                label="First name"
+                label="Prénom"
                 {...register("first_name", {
-                  required: "First name is required",
+                  required: "Prénom est requis",
                 })}
                 required
                 errors={errors}
                 autoComplete="given-name"
               />
               <Input
-                label="Last name"
+                label="Nom"
                 {...register("last_name", {
-                  required: "Last name is required",
+                  required: "Nom est requis",
                 })}
                 required
                 errors={errors}
                 autoComplete="family-name"
               />
             </div>
-            <Input label="Company" {...register("company")} errors={errors} />
+            <Input label="Etablissement" {...register("company")} errors={errors} />
             <Input
               label="Adresse"
               {...register("address_1", {

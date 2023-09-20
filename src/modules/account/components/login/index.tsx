@@ -19,7 +19,7 @@ const Login = () => {
   const router = useRouter()
 
   const handleError = (_e: Error) => {
-    setAuthError("Invalid email or password")
+    setAuthError("Email ou mot de passe incorrect.")
   }
 
   const {

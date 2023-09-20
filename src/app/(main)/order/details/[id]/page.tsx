@@ -10,7 +10,7 @@ async function getOrder(id: string) {
   const res = await medusaRequest("GET", `/orders/${id}`)
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch order: ${id}`)
+    throw new Error(`Erreur lors du placement de la commande: ${id}`)
   }
 
   return res.body
@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { order } = await getOrder(params.id)
 
   return {
-    title: `Order #${order.display_id}`,
-    description: `View your order`,
+    title: `Commande #${order.display_id}`,
+    description: `Voir ma commande`,
   }
 }
 
