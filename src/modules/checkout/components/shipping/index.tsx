@@ -61,7 +61,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
             {
               type: "validate",
               message:
-                "An error occurred while adding shipping. Please try again.",
+                "Une erreur est survenue lors de la sélection de la méthode de livraison.",
             },
             { shouldFocus: true }
           ),
@@ -97,10 +97,10 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
   return (
     <StepContainer
       index={sameBilling ? 2 : 3}
-      title="Delivery"
+      title="Livraison"
       closedState={
         <div className="px-8 pb-8 text-small-regular">
-          <p>Enter your address to see available delivery options.</p>
+          <p>Veuillez saisir votre adresse pour voir les méthodes de livraisons</p>
         </div>
       }
     >

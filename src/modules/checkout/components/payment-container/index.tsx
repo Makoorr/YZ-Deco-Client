@@ -14,16 +14,16 @@ type PaymentContainerProps = {
 
 const PaymentInfoMap: Record<string, { title: string; description: string }> = {
   stripe: {
-    title: "Credit card",
-    description: "Secure payment with credit card",
+    title: "Carte de crédit",
+    description: "Paiement sécurisé avec la carte de crédit",
   },
   "stripe-ideal": {
     title: "iDEAL",
-    description: "Secure payment with iDEAL",
+    description: "Paiement sécurisé avec iDEAL",
   },
   paypal: {
     title: "PayPal",
-    description: "Secure payment with PayPal",
+    description: "Paiement sécurisé avec PayPal",
   },
   manual: {
     title: "Test payment",

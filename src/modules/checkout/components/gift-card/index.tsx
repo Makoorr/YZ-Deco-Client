@@ -46,7 +46,7 @@ const GiftCard: React.FC<GiftCardProps> = ({ cart }) => {
           setError(
             "gift_card_code",
             {
-              message: "Code is invalid",
+              message: "Code invalide",
             },
             {
               shouldFocus: true,
@@ -71,7 +71,7 @@ const GiftCard: React.FC<GiftCardProps> = ({ cart }) => {
   return (
     <div className="w-full bg-white p-6 flex flex-col">
       <div className="mb-4">
-        <h3 className="text-base-semi">Gift Card</h3>
+        <h3 className="text-base-semi">Code Promo</h3>
       </div>
       <div className="text-small-regular">
         {appliedGiftCard ? (
@@ -87,7 +87,7 @@ const GiftCard: React.FC<GiftCardProps> = ({ cart }) => {
                 disabled={isLoading}
               >
                 <Trash size={16} />
-                <span className="sr-only">Remove gift card from order</span>
+                <span className="sr-only">Supprimer code promo de la commande</span>
               </button>
             </div>
           </div>
@@ -97,7 +97,7 @@ const GiftCard: React.FC<GiftCardProps> = ({ cart }) => {
               <Input
                 label="Code"
                 {...register("gift_card_code", {
-                  required: "Code is required",
+                  required: "Code requis",
                 })}
                 errors={errors}
                 touched={touchedFields}
@@ -108,7 +108,7 @@ const GiftCard: React.FC<GiftCardProps> = ({ cart }) => {
                   disabled={isLoading}
                   isLoading={isLoading}
                 >
-                  Apply
+                  Appliquer
                 </Button>
               </div>
             </div>
