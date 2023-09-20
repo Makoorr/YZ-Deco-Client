@@ -26,7 +26,7 @@ const Addresses = () => {
           <ShippingAddress />
           <div className="mt-6">
             <Checkbox
-              label="Même que l'adresse de facturation"
+              label="Même que l&apos;adresse de facturation"
               checked={checked}
               onChange={onChange}
             />
@@ -83,7 +83,7 @@ const Addresses = () => {
                         <div className="flex items-center justify-center border border-gray-700 bg-gray-100 w-4 h-4">
                           ✓
                         </div>
-                        <span>Même que l'adresse de facturation</span>
+                        <span>Même que l&apos;adresse de facturation</span>
                       </div>
                     )}
                   </div>
