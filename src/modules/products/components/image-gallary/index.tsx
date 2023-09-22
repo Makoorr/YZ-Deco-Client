@@ -1,6 +1,6 @@
 import { Image as MedusaImage } from "@medusajs/medusa"
 import Image from "next/image"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 type ImageGalleryProps = {
   images: MedusaImage[]
@@ -8,15 +8,15 @@ type ImageGalleryProps = {
 
 const ImageGallery = ({ images }: ImageGalleryProps) => {
   const imageRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [actualImage, setActualImage] = useState(images[0].id);
 
-  const handleScrollTo = (id: string) => {
+  const handleClick = (id: string) => {
     const element = document.getElementById(id)
+    const actualElement = document.getElementById(actualImage);
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      })
+      actualElement?.children[0].setAttribute("hidden", "");
+      element.children[0].removeAttribute("hidden");
+      setActualImage(element.id);
     }
   }
 
@@ -29,10 +29,10 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
               key={image.id}
               className="h-14 w-12 relative border border-white"
               onClick={() => {
-                handleScrollTo(image.id)
+                handleClick(image.id)
               }}
             >
-              <span className="sr-only">Accéder l&apos;image {index + 1}</span>
+              <span className="sr-only">Voir image {index + 1}</span>
               <Image
                 src={image.url}
                 className="absolute inset-0"
@@ -53,20 +53,36 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
             <div
               ref={(image) => imageRefs.current.push(image)}
               key={image.id}
-              className="relative aspect-[29/34] w-full"
+              className="absolute aspect-[4/3] w-full"
               id={image.id}
+              style={{ overflow: "hidden" }}
             >
+              { (index<1) ? (
               <Image
-                src={image.url}
-                priority={index <= 2 ? true : false}
-                className="absolute inset-0"
-                alt={`Product image ${index + 1}`}
-                fill
-                sizes="100vw"
-                style={{
-                  objectFit: "cover",
-                }}
+              src={image.url}
+              priority={index <= 2 ? true : false}
+              className="inset-0"
+              alt={`Product image ${index + 1}`}
+              fill
+              sizes="100%"
+              style={{
+                objectFit: "cover",
+              }}
               />
+              ) : (
+                <Image
+              src={image.url}
+              priority={index <= 2 ? true : false}
+              className="inset-0"
+              alt={`Product image ${index + 1}`}
+              fill
+              hidden
+              sizes="100%"
+              style={{
+                objectFit: "cover",
+              }}
+              />
+              )}
             </div>
           )
         })}
