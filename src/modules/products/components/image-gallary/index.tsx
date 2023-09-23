@@ -1,6 +1,7 @@
 import { Image as MedusaImage } from "@medusajs/medusa"
 import Image from "next/image"
 import { useRef, useState } from "react"
+import useWindowDimensions from "@lib/hooks/use-window-dimensions"
 
 type ImageGalleryProps = {
   images: MedusaImage[]
@@ -9,6 +10,7 @@ type ImageGalleryProps = {
 const ImageGallery = ({ images }: ImageGalleryProps) => {
   const imageRefs = useRef<(HTMLDivElement | null)[]>([])
   const [actualImage, setActualImage] = useState(images[0].id);
+  const { height, width } = useWindowDimensions();
 
   const handleClick = (id: string) => {
     const element = document.getElementById(id)
@@ -21,8 +23,8 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
   }
 
   return (
-    <div className="flex items-start relative">
-      <div className="hidden small:flex flex-col gap-y-4 sticky top-20">
+    <div className={((width && width < 1024) ? "grid mb-6" : "flex") + " items-start relative"}>
+      <div className="small:flex flex-col gap-y-4 sticky top-20">
         {images.map((image, index) => {
           return (
             <button
@@ -38,7 +40,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 className="absolute inset-0"
                 alt="Thumbnail"
                 fill
-                sizes="100vw"
+                sizes="500vw"
                 style={{
                   objectFit: "cover",
                 }}
@@ -47,13 +49,14 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
           )
         })}
       </div>
+      
       <div className="flex flex-col flex-1 small:mx-16 gap-y-4">
         {images.map((image, index) => {
           return (
             <div
               ref={(image) => imageRefs.current.push(image)}
               key={image.id}
-              className="absolute aspect-[1/1]"
+              className={(index<1) ? "image-gallery-position aspect-[1/1]" : "absolute aspect-[1/1]" }
               id={image.id}
               style={{ overflow: "hidden", width: "-webkit-fill-available", marginRight: "5em", marginBottom: "5em" }}
             >
