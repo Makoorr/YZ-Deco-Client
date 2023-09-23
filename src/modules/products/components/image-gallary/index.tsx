@@ -53,9 +53,9 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
             <div
               ref={(image) => imageRefs.current.push(image)}
               key={image.id}
-              className="absolute aspect-[4/3] w-full"
+              className="absolute aspect-[1/1]"
               id={image.id}
-              style={{ overflow: "hidden" }}
+              style={{ overflow: "hidden", width: "-webkit-fill-available", marginRight: "5em", marginBottom: "5em" }}
             >
               { (index<1) ? (
               <Image
