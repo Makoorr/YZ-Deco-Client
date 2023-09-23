@@ -33,7 +33,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
           <ProductTabs product={product} />
         </div>
       </div>
-      <div className="content-container my-16 px-6 small:px-8 small:my-32">
+      <div className="content-container my-8 px-6 small:px-8 small:my-16">
         <RelatedProducts product={product} />
       </div>
       <MobileActions product={product} show={!inView} />

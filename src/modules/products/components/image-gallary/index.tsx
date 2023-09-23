@@ -23,8 +23,8 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
   }
 
   return (
-    <div className={((width && width < 1024) ? "grid mb-6" : "flex") + " items-start relative"}>
-      <div className="small:flex flex-col gap-y-4 sticky top-20">
+    <div className={((width && width < 1024) ? "grid " : "flex ") + "items-start relative"}>
+      <div className={((width && width < 1024) ? "mb-4 " : "") + "small:flex flex-col gap-y-4 sticky top-20"}>
         {images.map((image, index) => {
           return (
             <button
@@ -40,7 +40,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 className="absolute inset-0"
                 alt="Thumbnail"
                 fill
-                sizes="500vw"
+                sizes="100vw"
                 style={{
                   objectFit: "cover",
                 }}
@@ -50,13 +50,13 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
         })}
       </div>
       
-      <div className="flex flex-col flex-1 small:mx-16 gap-y-4">
+      <div className="relative flex flex-col flex-1 small:mx-16 gap-y-4">
         {images.map((image, index) => {
           return (
             <div
               ref={(image) => imageRefs.current.push(image)}
               key={image.id}
-              className={(index<1) ? "image-gallery-position aspect-[1/1]" : "absolute aspect-[1/1]" }
+              className={(index<1) ? "relative aspect-[1/1]" : "absolute aspect-[1/1]" }
               id={image.id}
               style={{ overflow: "hidden", width: "-webkit-fill-available", marginRight: "5em", marginBottom: "5em" }}
             >
