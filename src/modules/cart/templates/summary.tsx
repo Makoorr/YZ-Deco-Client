@@ -12,7 +12,7 @@ const Summary = ({ cart }: SummaryProps) => {
     <div className="grid grid-cols-1 gap-y-6">
       <CartTotals cart={cart} />
       <Link href="/checkout">
-        <Button>Aller à la caisse</Button>
+        <Button>Paiement</Button>
       </Link>
     </div>
   )

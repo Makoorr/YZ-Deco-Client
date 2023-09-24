@@ -8,7 +8,7 @@ const EmptyCartMessage = () => {
       Vous n&apos;avez rien dans votre sac. Utilisez le lien ci-dessous pour commencer à parcourir nos produits.
       </p>
       <div>
-        <UnderlineLink href="/store">Explorer les produits</UnderlineLink>
+        <UnderlineLink href="/store">Explorer nos produits</UnderlineLink>
       </div>
     </div>
   )
