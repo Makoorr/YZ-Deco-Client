@@ -24,7 +24,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
 
   return (
     <div className={((width && width < 1024) ? "grid " : "flex ") + "items-start relative"}>
-      <div className={((width && width < 1024) ? "mb-4 " : "") + "small:flex flex-col gap-y-4 sticky top-20"}>
+      <div className={((width && width < 1024) ? "mb-4 " : "") + "small:flex flex-col gap-y-4 top-20"}>
         {images.map((image, index) => {
           return (
             <button
