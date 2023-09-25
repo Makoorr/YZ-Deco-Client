@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const FooterCTA = () => {
   return (
-    <div className="bg-amber-800 w-full">
+    <div className="bg-amber-800 w-full" style={{ height: "60vh" }}>
       <div className="content-container flex flex-col-reverse gap-y-8 small:flex-row small:items-center justify-between py-16 relative">
         <div>
           <h3 className="text-2xl-semi">Achetez les derniers styles</h3>
@@ -21,6 +21,7 @@ const FooterCTA = () => {
             sizes="100vw"
             style={{
               objectFit: "cover",
+              height: "100%",
             }}
           />
         </div>
