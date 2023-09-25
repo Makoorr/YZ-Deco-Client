@@ -3,6 +3,7 @@ import PlaceholderImage from "@modules/common/icons/placeholder-image"
 import clsx from "clsx"
 import Image from "next/image"
 import React from "react"
+import styles from "./style.module.css"
 
 type ThumbnailProps = {
   thumbnail?: string | null
@@ -19,14 +20,14 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 
   return (
     <div
-      className={clsx("relative aspect-[29/34]", {
+      className={styles.skel +" "+ clsx("relative aspect-[29/34]", {
         "w-[180px]": size === "small",
         "w-[290px]": size === "medium",
         "w-[440px]": size === "large",
         "w-full": size === "full",
       })}
     >
-      <ImageOrPlaceholder image={initialImage} size={size} />
+        <ImageOrPlaceholder image={initialImage} size={size} />*
     </div>
   )
 }
@@ -46,6 +47,7 @@ const ImageOrPlaceholder = ({
       style={{
         objectFit: "cover",
         objectPosition: "center",
+        overflow: "hidden",
       }}
     />
   ) : (
