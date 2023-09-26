@@ -11,7 +11,7 @@ export const Carousel = (content: any) => {
 
   const updateIndex = (newIndex: number) => {
     if (data){
-      length = data.length % 4;
+      length = data.length / 4;
       if (newIndex < 0) {
         newIndex = length - 1;
       } else if (newIndex >= length) {
