@@ -1,9 +1,8 @@
 "use client"
 
 import { useFeaturedProductsQuery } from "@lib/hooks/use-layout-data"
+import { Carousel } from "@modules/common/components/carousel"
 import UnderlineLink from "@modules/common/components/underline-link"
-import ProductPreview from "@modules/products/components/product-preview"
-import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"
 
 const FeaturedProducts = () => {
   const { data } = useFeaturedProductsQuery()
@@ -20,19 +19,7 @@ const FeaturedProducts = () => {
           </p>
           <UnderlineLink href="/store">Explorer nos produits</UnderlineLink>
         </div>
-        <ul className="grid grid-cols-2 small:grid-cols-4 gap-x-4 gap-y-8">
-          {data
-            ? data.map((product) => (
-                <li key={product.id}>
-                  <ProductPreview {...product} />
-                </li>
-              ))
-            : Array.from(Array(4).keys()).map((i) => (
-                <li key={i}>
-                  <SkeletonProductPreview />
-                </li>
-              ))}
-        </ul>
+        <Carousel content={data} />
       </div>
     </div>
   )
