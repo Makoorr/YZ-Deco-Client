@@ -3,7 +3,7 @@
   display: grid;
   gap: 10px;
   grid-auto-columns: calc(100% / 4 - 5px);
-  grid-auto-flow: column; /* Stack items in columns */
+  grid-auto-flow: column;
   transition: transform 0.3s;
   width: 100%;
 }
@@ -51,6 +51,26 @@
   scale: 1.5;
 }
 
+@media (max-width: 1200px) {
+  .svgArrow {
+    transform: translateY(450%) rotate(180deg);
+  }
+
+  .svgArrowRight {
+    transform: translateY(450%);
+  }
+}
+
+@media (max-width: 800px) {
+  .svgArrow {
+    transform: translateY(250%) rotate(180deg);
+  }
+
+  .svgArrowRight {
+    transform: translateY(250%);
+  }
+}
+
 @media (max-width: 572px) {
   .carousel .arrow:last-child {
     position: absolute;
@@ -61,13 +81,5 @@
 @media (max-width: 720px) {
   .carousel .arrow {
     width: 2em;
-  }
-
-  .svgArrow {
-    transform: translateY(350%) rotate(180deg);
-  }
-
-  .svgArrowRight {
-    transform: translateY(350%);
   }
 }

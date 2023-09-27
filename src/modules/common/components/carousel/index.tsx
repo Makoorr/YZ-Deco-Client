@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from './styles.module.css'
 import ArrowRight from "@modules/common/icons/arrow-right";
-// import { useFeaturedProductsQuery } from "@lib/hooks/use-layout-data";
 import ProductPreview from "@modules/products/components/product-preview";
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview";
 import { ProductPreviewType } from "types/global";
@@ -12,11 +11,8 @@ export const Carousel = (content: any) => {
   const updateIndex = (newIndex: number) => {
     if (data){
       length = Math.ceil(data.length / 4);
-      console.log(length)
-      if (newIndex < 0) {
-        newIndex = length - 1;
-      } else if (newIndex >= length) {
-        newIndex = 0;
+      if (newIndex < 0 || newIndex >= length) {
+        newIndex = activeIndex;
       }
     }
 
@@ -24,6 +20,41 @@ export const Carousel = (content: any) => {
   };
 
   const data: ProductPreviewType[] = content.content;
+
+  const slider = document.getElementById('slider');
+  const [isDown, setIsDown] = useState<boolean>(false);
+  const [startX, setStartX] = useState<number | null>(null);
+  var dist: number;
+
+  function end() {
+    setIsDown(false);
+    (dist && dist >= 0 ) ? updateIndex(activeIndex - 1) : updateIndex(activeIndex + 1);
+  };
+      
+  function start (e: any) {
+    setIsDown(true);
+    const x = e.pageX || (e.touches && e.touches[0].pageX) || 0;
+    setStartX(x - (slider?.offsetLeft || 0));
+  };
+  
+  function move (e: any) {
+    if (!isDown) return;
+    
+    e.preventDefault();
+    const x = e.pageX || (e.touches && e.touches[0].pageX) || 0;
+    dist = x - (startX || 0);
+  };
+  
+  if (slider) {
+    slider.addEventListener('mousedown', start);
+    slider.addEventListener('touchstart', start);
+
+    slider.addEventListener('mousemove', move);
+    slider.addEventListener('touchmove', move);
+
+    slider.addEventListener('mouseup', end);
+    slider.addEventListener('touchend', end);
+  };
 
   return (
     <div className={styles.carousel}>
@@ -40,7 +71,8 @@ export const Carousel = (content: any) => {
 
       <ul
         className={styles.inner}
-        style={{ transform: `translate(-${activeIndex * 101}%)`}}
+        style={{ transform: `translate(-${activeIndex * 101}%)`, cursor: 'grab' }}
+        id="slider"
       >
         {data
           ? data.map((product: any) => (
