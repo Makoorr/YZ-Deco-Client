@@ -10,6 +10,7 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 import ProductPreview from "../product-preview"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { getProductsList } from "@lib/data"
+import { Carousel } from "@modules/common/components/carousel"
 
 type RelatedProductsProps = {
   product: PricedProduct
@@ -59,27 +60,7 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
           Consulter ces produits similaires.
         </p>
       </div>
-
-      <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-4 gap-y-8">
-        {previews.map((p) => (
-          <li key={p.id}>
-            <ProductPreview {...p} />
-          </li>
-        ))}
-        {isLoading &&
-          !previews.length &&
-          repeat(8).map((index) => (
-            <li key={index}>
-              <SkeletonProductPreview />
-            </li>
-          ))}
-        {isFetchingNextPage &&
-          repeat(getNumberOfSkeletons(data?.pages)).map((index) => (
-            <li key={index}>
-              <SkeletonProductPreview />
-            </li>
-          ))}
-      </ul>
+      <Carousel content={previews} />
       {hasNextPage && (
         <div className="flex items-center justify-center mt-8">
           <Button

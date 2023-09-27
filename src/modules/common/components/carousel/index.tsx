@@ -4,13 +4,15 @@ import ArrowRight from "@modules/common/icons/arrow-right";
 import ProductPreview from "@modules/products/components/product-preview";
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview";
 import { ProductPreviewType } from "types/global";
+import useWindowDimensions from "@lib/hooks/use-window-dimensions";
 
 export const Carousel = (content: any) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { height, width } = useWindowDimensions();
 
   const updateIndex = (newIndex: number) => {
     if (data){
-      length = Math.ceil(data.length / 4);
+      (width && width>=1024) ? length = Math.ceil(data.length / 4): length = Math.ceil(data.length / 2) || (length = 1);
       if (newIndex < 0 || newIndex >= length) {
         newIndex = activeIndex;
       }
