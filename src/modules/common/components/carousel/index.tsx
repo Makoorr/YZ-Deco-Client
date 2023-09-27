@@ -11,7 +11,8 @@ export const Carousel = (content: any) => {
 
   const updateIndex = (newIndex: number) => {
     if (data){
-      length = data.length / 4;
+      length = Math.ceil(data.length / 4);
+      console.log(length)
       if (newIndex < 0) {
         newIndex = length - 1;
       } else if (newIndex >= length) {
@@ -25,21 +26,21 @@ export const Carousel = (content: any) => {
   const data: ProductPreviewType[] = content.content;
 
   return (
-    <div className={styles.carousel + " overflow-hidden"}>
-      <button
+    <div className={styles.carousel}>
+      <div
+        className={styles.arrow}
         onClick={() => {
           updateIndex(activeIndex - 1);
         }}
       >
-        <div>
-          <ArrowRight
-            transform= "rotate(180)"
-          />
-        </div>{" "}
-      </button>
+            <ArrowRight
+              className={styles.svgArrow}
+            />
+      </div>
+
       <ul
         className={styles.inner}
-        style={{ transform: `translate(-${activeIndex * 100}%)`}}
+        style={{ transform: `translate(-${activeIndex * 101}%)`}}
       >
         {data
           ? data.map((product: any) => (
@@ -55,15 +56,20 @@ export const Carousel = (content: any) => {
           )))
         }
       </ul>
-      <button
+
+      <div
+        className={styles.arrow}
+        style={{
+          right: 0,
+        }}
         onClick={() => {
           updateIndex(activeIndex + 1);
         }}
       >
-        <span className={styles.materialSymbolsOutlined}>
-          <ArrowRight/>
-        </span>
-      </button>
+        <ArrowRight
+          className={styles.svgArrowRight}
+        />
+      </div>
     </div>
   );
 };
