@@ -23,20 +23,14 @@ export const Carousel = (content: any) => {
 
   const data: ProductPreviewType[] = content.content;
 
-  const slider = document.getElementById('slider');
   const [isDown, setIsDown] = useState<boolean>(false);
   const [startX, setStartX] = useState<number | null>(null);
   var dist: number;
-
-  function end() {
-    setIsDown(false);
-    (dist && dist >= 0 ) ? updateIndex(activeIndex - 1) : updateIndex(activeIndex + 1);
-  };
       
   function start (e: any) {
     setIsDown(true);
     const x = e.pageX || (e.touches && e.touches[0].pageX) || 0;
-    setStartX(x - (slider?.offsetLeft || 0));
+    setStartX(x);
   };
   
   function move (e: any) {
@@ -46,16 +40,10 @@ export const Carousel = (content: any) => {
     const x = e.pageX || (e.touches && e.touches[0].pageX) || 0;
     dist = x - (startX || 0);
   };
-  
-  if (slider) {
-    slider.addEventListener('mousedown', start);
-    slider.addEventListener('touchstart', start);
 
-    slider.addEventListener('mousemove', move);
-    slider.addEventListener('touchmove', move);
-
-    slider.addEventListener('mouseup', end);
-    slider.addEventListener('touchend', end);
+  function end() {
+    setIsDown(false);
+    (dist && dist >= 0 ) ? updateIndex(activeIndex - 1) : updateIndex(activeIndex + 1);
   };
 
   return (
@@ -74,7 +62,12 @@ export const Carousel = (content: any) => {
       <ul
         className={styles.inner}
         style={{ transform: `translate(-${activeIndex * 101}%)`, cursor: 'grab' }}
-        id="slider"
+        onMouseDown={start}
+        onTouchStart={start}
+        onMouseMove={move}
+        onTouchMove={move}
+        onMouseUp={end}
+        onTouchEnd={end}
       >
         {data
           ? data.map((product: any) => (
