@@ -1,5 +1,6 @@
 import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
+import TextDescription from "@modules/home/components/text-description"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -12,7 +13,23 @@ const Home = () => {
   return (
     <>
       <Hero />
+      <hr className="xsmall:mt-8 mt-4"
+        style={{
+          borderTop: "3px solid #00000020",
+        }}
+      ></hr>
       <FeaturedProducts />
+      <hr className="xsmall:mb-8 mb-4"
+        style={{
+          borderTop: "3px solid #00000020",
+        }}
+      ></hr>
+      <TextDescription />
+      <hr className="xsmall:mb-8 mb-4"
+        style={{
+          borderTop: "3px solid #00000020",
+        }}
+      ></hr>
     </>
   )
 }
