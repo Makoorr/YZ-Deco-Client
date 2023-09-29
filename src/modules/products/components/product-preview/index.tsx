@@ -32,7 +32,7 @@ const ProductPreview = ({
                 </span>
               </>
             ) : (
-              <div className="w-20 h-6 animate-pulse bg-gray-100"></div>
+              <div className="w-20 h-6 animate-pulse bg-gray-100 shadow-lg"></div>
             )}
           </div>
         </div>

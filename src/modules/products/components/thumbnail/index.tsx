@@ -20,7 +20,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 
   return (
     <div
-      className={styles.skel +" "+ clsx("relative aspect-[29/34]", {
+      className={styles.skel +" "+ clsx("relative aspect-[29/34] shadow-lg", {
         "w-[180px]": size === "small",
         "w-[290px]": size === "medium",
         "w-[440px]": size === "large",
