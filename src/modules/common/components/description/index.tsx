@@ -11,7 +11,7 @@ const Description = (props: Props) => {
     return (
         <section
             className={styles.blockquoteSectionType1 +" "+ styles.simpleBackground +" "+ styles.parallaxWindow +" "+ styles.defaultOverlay}
-            style={{backgroundImage: "url("+props.backgroundImage+")"}}
+            style={{backgroundImage: "url("+props.backgroundImage+")", backgroundSize: "cover", backgroundPosition: "center center"}}
         >
         <div className={styles.blockquoteWrapper + " flex flex-row content-center justify-center"}>
             <div className={"flex self-center justify-center"}>
