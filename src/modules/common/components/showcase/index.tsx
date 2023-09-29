@@ -8,7 +8,6 @@ type LayoutCollection = {
 
 const Showcase = (content: any) => {
     let data: LayoutCollection[] = content.content;
-    data && (data = data.toReversed());
 
     return (
         <div className="grid small:grid-cols-2 small:gap-x-4 grid-cols-1 gap-2 p-2">
