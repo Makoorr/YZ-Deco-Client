@@ -1,3 +1,4 @@
+import CollectionShowcase from "@modules/home/components/collection-showcase"
 import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
 import TextDescription from "@modules/home/components/text-description"
@@ -25,6 +26,12 @@ const Home = () => {
         }}
       ></hr>
       <TextDescription />
+      <hr className="xsmall:mb-8 mb-4"
+        style={{
+          borderTop: "3px solid #00000020",
+        }}
+      ></hr>
+      <CollectionShowcase />
       <hr className="xsmall:mb-8 mb-4"
         style={{
           borderTop: "3px solid #00000020",
