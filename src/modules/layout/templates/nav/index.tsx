@@ -84,7 +84,7 @@ const Nav = () => {
               {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
               <Link href="/account">
                 <div className="grid grid-cols-3 gap-0">
-                  <a className="col-span-2">Mon Compte </a>
+                  <div className="col-span-2">Mon Compte </div>
                   <User className="justify-self-center" size={20}></User>
                 </div>
                 </Link>
