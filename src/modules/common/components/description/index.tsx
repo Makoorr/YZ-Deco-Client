@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css"
 import Quote from "@modules/common/icons/quote";
+import Image from "next/image"
 
 interface Props {
     content: any;
@@ -10,8 +11,7 @@ interface Props {
 const Description = (props: Props) => {
     return (
         <section
-            className={styles.blockquoteSectionType1 +" "+ styles.simpleBackground +" "+ styles.parallaxWindow +" "+ styles.defaultOverlay}
-            style={{backgroundImage: "url("+props.backgroundImage+")", backgroundSize: "cover", backgroundPosition: "center center"}}
+            className={styles.simpleBackground +" "+ styles.parallaxWindow}
         >
         <div className={styles.blockquoteWrapper + " flex flex-row content-center justify-center"}>
             <div className={"flex self-center justify-center"}>
@@ -22,6 +22,24 @@ const Description = (props: Props) => {
                     <h4>{props.content}</h4>
                 </div>
             </div>
+        <div 
+            className={styles.defaultOverlay + " inset-0 absolute"}
+        >
+            <Image
+                src="/description.jpg"
+                loading="eager"
+                priority={true}
+                quality={90}
+                alt="Description Photo"
+                className={"absolute inset-0"}
+                draggable="false"
+                fill
+                sizes="500vw"
+                style={{
+                objectFit: "cover",
+                }}
+            />
+        </div>
         </div>
     </section>
     )
