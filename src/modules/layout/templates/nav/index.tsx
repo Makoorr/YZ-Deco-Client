@@ -2,6 +2,7 @@
 
 import { useMobileMenu } from "@lib/context/mobile-menu-context"
 import Hamburger from "@modules/common/components/hamburger"
+import User from "@modules/common/icons/user"
 import CartDropdown from "@modules/layout/components/cart-dropdown"
 import DropdownMenu from "@modules/layout/components/dropdown-menu"
 import MobileMenu from "@modules/mobile-menu/templates"
@@ -78,10 +79,15 @@ const Nav = () => {
             </Link>
           </div>
 
-          <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
+          <div className="flex items-center gap-x-3 h-full flex-1 basis-0 justify-end">
             <div className="hidden small:flex items-center gap-x-6 h-full">
               {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
-              <Link href="/account">Mon Compte</Link>
+              <Link href="/account">
+                <div className="grid grid-cols-3 gap-0">
+                  <a className="col-span-2">Mon Compte </a>
+                  <User className="justify-self-center" size={20}></User>
+                </div>
+                </Link>
             </div>
             <CartDropdown />
           </div>
