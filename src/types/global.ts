@@ -6,6 +6,7 @@ import { ReactElement, ReactNode } from "react"
 export type CollectionData = {
   id: string
   title: string
+  imageURL?: string
 }
 
 export type FeaturedProduct = {

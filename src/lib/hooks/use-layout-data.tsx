@@ -1,6 +1,6 @@
 import { getProductsList, getCollectionsList } from "@lib/data"
 import { getPercentageDiff } from "@lib/util/get-precentage-diff"
-import { ProductCollection, Region } from "@medusajs/medusa"
+import { Product, ProductCollection, Region } from "@medusajs/medusa"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { useQuery } from "@tanstack/react-query"
 import { formatAmount, useCart } from "medusa-react"
@@ -10,6 +10,51 @@ import { CalculatedVariant } from "types/medusa"
 type LayoutCollection = {
   handle: string
   title: string
+  imageURL: string
+}
+
+type Collection = {
+  title: string;
+  handle: string;
+  products: Product[];
+  metadata: Record<string, unknown>;
+  imageURL: string;
+}
+
+const fetchCollection = async (): Promise<LayoutCollection[]> => {
+  let collections: Collection[] = []
+  let offset = 0
+  let count = 1
+
+  do {
+    await getCollectionsList(offset)
+      .then((res) => res)
+      .then(({ collections: newCollections, count: newCount }) => {
+        collections = [...collections, ...newCollections]
+        count = newCount
+        offset = collections.length
+      })
+      .catch((_) => {
+        count = 0
+      })
+  } while (collections.length < count)
+
+  return collections.map((c) => ({
+    handle: c.handle,
+    title: c.title,
+    imageURL: c.imageURL,
+  }))
+}
+
+export const useShowcaseCollections = () => {
+  const queryResults = useQuery({
+    queryFn: fetchCollection,
+    queryKey: ["showcase_collections"],
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
+
+  return queryResults
 }
 
 const fetchCollectionData = async (): Promise<LayoutCollection[]> => {
@@ -33,6 +78,7 @@ const fetchCollectionData = async (): Promise<LayoutCollection[]> => {
   return collections.map((c) => ({
     handle: c.handle,
     title: c.title,
+    imageURL: "",
   }))
 }
 
