@@ -1,6 +1,7 @@
 import SkeletonCollectionShowcase from '@modules/skeletons/components/skeleton-collection-showcase';
 import React from 'react';
 import Image from 'next/image';
+import UnderlineLink from '../underline-link';
 
 type LayoutCollection = {
     handle: string
@@ -28,6 +29,9 @@ const Showcase = (content: any) => {
                                 : 
                                 <h1>{data[0].title}</h1>
                             }
+                            <div className="absolute -translate-y-28 translate-x-4 sm:translate-x-8 md:translate-x-24 lg:translate-x-4 text-white bg-black/30 shadow-2xl rounded-2xl small:pb-3 px-4 pb-2 shadow-2xl scale-100 sm:scale-125 lg:scale-90 drop-shadow-2xl">
+                                <UnderlineLink href={"/collections/"+data[0].handle}>{data[0].title}</UnderlineLink>
+                            </div>
                         </a>
                     </div>
                     <div className="grid small:grid-cols-2 small:gap-4 grid-cols-1 gap-2 place-self-center w-full overflow-hidden">
@@ -45,6 +49,9 @@ const Showcase = (content: any) => {
                                     : 
                                     <h1>{collection.title}</h1>
                                 }
+                                <div className="absolute -translate-y-28 translate-x-4 sm:translate-x-8 md:translate-x-12 lg:translate-x-0 text-white bg-black/30 shadow-2xl rounded-2xl px-2 pb-2 shadow-2xl scale-100 sm:scale-125 lg:scale-90 drop-shadow-2xl">
+                                    <UnderlineLink href={"/collections/"+collection.handle}>{collection.title}</UnderlineLink>
+                                </div>
                                 </a>
                             </div>
                         ))}
