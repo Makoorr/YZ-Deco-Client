@@ -12,6 +12,7 @@ module.exports = withStoreConfig({
     domains: [
       "medusa-public-images.s3.eu-west-1.amazonaws.com",
       "yz-deco-backend-production.up.railway.app",
+      "yzdev.s3.eu-west-3.amazonaws.com",
       "iili.io",
       "medusa-server-testing.s3.amazonaws.com",
     ],
