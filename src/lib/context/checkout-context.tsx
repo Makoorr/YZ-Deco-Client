@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation"
 import React, { createContext, useContext, useEffect, useMemo } from "react"
 import { FormProvider, useForm, useFormContext } from "react-hook-form"
 import { useStore } from "./store-context"
+import { formatTNDAmount } from "../util/tnd-price"
 
 type AddressValues = {
   first_name: string
@@ -56,6 +57,7 @@ interface CheckoutContext {
   setShippingOption: (soId: string) => void
   setPaymentSession: (providerId: string) => void
   onPaymentCompleted: () => void
+  onKonnectPaymentCompleted: (payUrl: string) => void
 }
 
 const CheckoutContext = createContext<CheckoutContext | null>(null)
@@ -147,10 +149,10 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
       return shipping_options?.map((option) => ({
         value: option.id,
         label: option.name,
-        price: formatAmount({
+        price: (cart.region.currency_code !== "tnd") ? formatAmount({
           amount: option.amount || 0,
           region: cart.region,
-        }),
+        }): formatTNDAmount(option.amount || 0),
       }))
     }
 
@@ -321,6 +323,15 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
       },
     })
   }
+  
+  const onKonnectPaymentCompleted = (payUrl: string) => {
+    complete(undefined, {
+      onSuccess: ({ data }) => {
+        resetCart()
+        push(payUrl)
+      },
+    })
+  }
 
   return (
     <FormProvider {...methods}>
@@ -338,6 +349,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
           setShippingOption,
           setPaymentSession,
           onPaymentCompleted,
+          onKonnectPaymentCompleted,
         }}
       >
         <Wrapper paymentSession={cart?.payment_session}>{children}</Wrapper>

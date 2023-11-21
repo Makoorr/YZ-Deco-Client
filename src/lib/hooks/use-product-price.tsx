@@ -1,6 +1,7 @@
 import { formatAmount, useCart, useProducts } from "medusa-react"
 import { useEffect, useMemo } from "react"
 import { CalculatedVariant } from "types/medusa"
+import { formatTNDAmount } from "../util/tnd-price"
 
 type useProductPriceProps = {
   id: string
@@ -45,16 +46,18 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
     })
 
     return {
-      calculated_price: formatAmount({
-        amount: cheapestVariant.calculated_price,
-        region: cart.region,
-        includeTaxes: false,
-      }),
-      original_price: formatAmount({
-        amount: cheapestVariant.original_price,
-        region: cart.region,
-        includeTaxes: false,
-      }),
+      calculated_price: (cart?.region?.currency_code !== "tnd" || !(cheapestVariant.calculated_price)) ?
+        formatAmount({
+          amount: cheapestVariant.calculated_price,
+          region: cart.region,
+          includeTaxes: false,
+        }) : formatTNDAmount(cheapestVariant.calculated_price),
+      original_price: (cart?.region?.currency_code !== "tnd" || !(cheapestVariant.original_price)) ?
+        formatAmount({
+          amount: cheapestVariant.original_price,
+          region: cart.region,
+          includeTaxes: false,
+        }) : formatTNDAmount(cheapestVariant.original_price),
       price_type: cheapestVariant.calculated_price_type,
       percentage_diff: getPercentageDiff(
         cheapestVariant.original_price,
@@ -77,16 +80,18 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
     }
 
     return {
-      calculated_price: formatAmount({
-        amount: variant.calculated_price,
-        region: cart.region,
-        includeTaxes: false,
-      }),
-      original_price: formatAmount({
-        amount: variant.original_price,
-        region: cart.region,
-        includeTaxes: false,
-      }),
+      calculated_price: (cart?.region?.currency_code !== "tnd" || !(variant.calculated_price)) ?
+        formatAmount({
+          amount: variant.calculated_price,
+          region: cart.region,
+          includeTaxes: false,
+        }) : formatTNDAmount(variant.calculated_price),
+      original_price: (cart?.region?.currency_code !== "tnd" || !(variant.original_price)) ?
+        formatAmount({
+          amount: variant.original_price,
+          region: cart.region,
+          includeTaxes: false,
+        }): formatTNDAmount(variant.original_price),
       price_type: variant.calculated_price_type,
       percentage_diff: getPercentageDiff(
         variant.original_price,

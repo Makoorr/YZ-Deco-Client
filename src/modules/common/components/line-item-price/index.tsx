@@ -3,6 +3,7 @@ import { LineItem, Region } from "@medusajs/medusa"
 import clsx from "clsx"
 import { formatAmount } from "medusa-react"
 import { CalculatedVariant } from "types/medusa"
+import { formatTNDAmount } from "../../../../lib/util/tnd-price"
 
 type LineItemPriceProps = {
   item: Omit<LineItem, "beforeInsert">
@@ -22,15 +23,17 @@ const LineItemPrice = ({
   return (
     <div className="flex flex-col text-gray-700 text-right">
       <span
-        className={clsx("text-base-regular", {
+        className={clsx("text-base-regular whitespace-nowrap font-medium", {
           "text-rose-600": hasReducedPrice,
         })}
       >
-        {formatAmount({
-          amount: item.total || 0,
-          region: region,
-          includeTaxes: false,
-        })}
+        { (region.currency_code !== "tnd" || !(item.total)) ? (
+          formatAmount({
+            amount: item.total || 0,
+            region: region,
+            includeTaxes: false,
+          })
+        ) : formatTNDAmount(item.total)}
       </span>
       {hasReducedPrice && (
         <>
@@ -39,11 +42,13 @@ const LineItemPrice = ({
               <span className="text-gray-500">Original: </span>
             )}
             <span className="line-through">
-              {formatAmount({
-                amount: originalPrice,
-                region: region,
-                includeTaxes: false,
-              })}
+              { (region.currency_code !== "tnd" || !(originalPrice)) ? (
+                formatAmount({
+                  amount: originalPrice,
+                  region: region,
+                  includeTaxes: false,
+                })
+              ) : formatTNDAmount(originalPrice)}
             </span>
           </p>
           {style === "default" && (

@@ -28,7 +28,7 @@ const OrderCompletedTemplate: React.FC<OrderCompletedTemplateProps> = ({
       <div className="content-container flex flex-col justify-center items-center">
         {isOnboarding && <OnboardingCta orderId={order.id} />}
         <div className="max-w-4xl h-full bg-white w-full">
-          <OrderDetails order={order} />
+          <OrderDetails order={order} showStatus={true} />
           <Items
             items={order.items}
             region={order.region}
@@ -41,9 +41,9 @@ const OrderCompletedTemplate: React.FC<OrderCompletedTemplateProps> = ({
             />
             <OrderSummary order={order} />
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-10">
+          {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-10">
             <Help />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

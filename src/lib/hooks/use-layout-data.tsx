@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import { formatAmount, useCart } from "medusa-react"
 import { ProductPreviewType } from "types/global"
 import { CalculatedVariant } from "types/medusa"
+import { formatTNDAmount } from "../util/tnd-price"
 
 type LayoutCollection = {
   handle: string
@@ -128,16 +129,18 @@ const fetchFeaturedProducts = async (
         thumbnail: p.thumbnail!,
         price: cheapestVariant
           ? {
-              calculated_price: formatAmount({
-                amount: cheapestVariant.calculated_price,
-                region: region,
-                includeTaxes: false,
-              }),
-              original_price: formatAmount({
-                amount: cheapestVariant.original_price,
-                region: region,
-                includeTaxes: false,
-              }),
+              calculated_price: (region?.currency_code !== "tnd" || !(cheapestVariant.calculated_price)) ?
+                formatAmount({
+                  amount: cheapestVariant.calculated_price,
+                  region: region,
+                  includeTaxes: false,
+                }) : formatTNDAmount(cheapestVariant.calculated_price),
+              original_price: (region?.currency_code !== "tnd" || !(cheapestVariant.original_price)) ?
+                formatAmount({
+                  amount: cheapestVariant.original_price,
+                  region: region,
+                  includeTaxes: false,
+                }) : formatTNDAmount(cheapestVariant.original_price),
               difference: getPercentageDiff(
                 cheapestVariant.original_price,
                 cheapestVariant.calculated_price

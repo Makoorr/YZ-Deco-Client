@@ -7,6 +7,7 @@ import { formatAmount, useCart, useUpdateCart } from "medusa-react"
 import React, { useMemo } from "react"
 import { useForm } from "react-hook-form"
 import { useMutation } from "@tanstack/react-query"
+import { formatTNDAmount } from "../../../../lib/util/tnd-price"
 
 type DiscountFormValues = {
   discount_code: string
@@ -36,10 +37,10 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
       case "percentage":
         return `${discounts[0].rule.value}%`
       case "fixed":
-        return `- ${formatAmount({
+        return `- ${(region.currency_code !== "tnd") ? formatAmount({
           amount: discounts[0].rule.value,
           region: region,
-        })}`
+        }) : formatTNDAmount(discounts[0].rule.value)}`
 
       default:
         return "Livraison gratuite"

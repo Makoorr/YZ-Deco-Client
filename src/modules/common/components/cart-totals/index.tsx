@@ -1,6 +1,7 @@
 import { Cart } from "@medusajs/medusa"
 import { formatAmount } from "medusa-react"
 import React from "react"
+import { formatTNDAmount } from "../../../../lib/util/tnd-price"
 
 type CartTotalsProps = {
   cart: Omit<Cart, "refundable_amount" | "refunded_total">
@@ -17,11 +18,12 @@ const CartTotals: React.FC<CartTotalsProps> = ({ cart }) => {
   } = cart
 
   const getAmount = (amount: number | null | undefined) => {
-    return formatAmount({
-      amount: amount || 0,
-      region: cart.region,
-      includeTaxes: false,
-    })
+    return (cart.region.currency_code !== "tnd") ?
+      formatAmount({
+        amount: amount || 0,
+        region: cart.region,
+        includeTaxes: false,
+      }) : formatTNDAmount(amount)
   }
 
   return (

@@ -5,6 +5,7 @@ import Package from "@modules/common/icons/package"
 import User from "@modules/common/icons/user"
 import { formatAmount } from "medusa-react"
 import Link from "next/link"
+import { formatTNDAmount } from "../../../../lib/util/tnd-price"
 
 type OverviewProps = {
   orders?: Order[]
@@ -126,11 +127,11 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                               </span>
                               <span>#{order.display_id}</span>
                               <span>
-                                {formatAmount({
+                                {(order.region.currency_code !== "tnd") ? formatAmount({
                                   amount: order.total,
                                   region: order.region,
                                   includeTaxes: false,
-                                })}
+                                }) : formatTNDAmount(order.total)}
                               </span>
                             </div>
                             <button

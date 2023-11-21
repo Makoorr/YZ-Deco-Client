@@ -1,6 +1,7 @@
 import { MoneyAmount } from "@medusajs/medusa"
 import { formatAmount } from "medusa-react"
 import { Region, Variant } from "types/medusa"
+import { formatTNDAmount } from "./tnd-price"
 
 export const findCheapestRegionPrice = (variants: Variant[], regionId: string) => {
   const regionPrices = variants.reduce((acc, v) => {
@@ -70,6 +71,9 @@ export const findCheapestPrice = (variants: Variant[], region: Region) => {
       }
 
       if (cheapestPrice) {
+        if(region.currency_code === "tnd"){
+          return formatTNDAmount(cheapestPrice.amount)
+        }
         return formatAmount({
           amount: cheapestPrice.amount,
           region: region,

@@ -1,5 +1,6 @@
 import { Order } from "@medusajs/medusa"
 import { formatAmount } from "medusa-react"
+import { formatTNDAmount } from "../../../../lib/util/tnd-price"
 
 type OrderSummaryProps = {
   order: Order
@@ -11,12 +12,12 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
       return
     }
 
-    return formatAmount({ amount, region: order.region, includeTaxes: false })
+    return (order.region.currency_code !== "tnd") ? formatAmount({ amount, region: order.region, includeTaxes: false }) : formatTNDAmount(amount)
   }
 
   return (
     <div>
-      <h2 className="text-base-semi">Order Summary</h2>
+      <h2 className="text-base-semi">Commande</h2>
       <div className="text-small-regular text-gray-700 my-2">
         <div className="flex items-center justify-between text-base-regular text-gray-900 mb-2">
           <span>Sous-total</span>

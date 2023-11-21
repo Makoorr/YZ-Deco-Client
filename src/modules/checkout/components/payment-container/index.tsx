@@ -13,6 +13,10 @@ type PaymentContainerProps = {
 }
 
 const PaymentInfoMap: Record<string, { title: string; description: string }> = {
+  konnect: {
+    title: "Konnect",
+    description: "Paiement sécurisé avec Konnect",
+  },
   stripe: {
     title: "Carte de crédit",
     description: "Paiement sécurisé avec la carte de crédit",
@@ -85,6 +89,8 @@ const PaymentElement = ({
     case "manual":
       // We only display the test payment form if we are in a development environment
       return process.env.NODE_ENV === "development" ? <PaymentTest /> : null
+    case "konnect":
+      return null
     default:
       return null
   }

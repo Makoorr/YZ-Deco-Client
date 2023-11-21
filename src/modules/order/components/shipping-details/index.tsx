@@ -11,9 +11,9 @@ const ShippingDetails = ({
 }: ShippingDetailsProps) => {
   return (
     <div className="text-base-regular">
-      <h2 className="text-base-semi">Delivery</h2>
+      <h2 className="text-base-semi">Livraison</h2>
       <div className="my-2">
-        <h3 className="text-small-regular text-gray-700">Address</h3>
+        <h3 className="text-small-regular text-gray-700">Adresse</h3>
         <div className="flex flex-col">
           <span>{`${address.first_name} ${address.last_name}`}</span>
           <span>{`${address.address_1}${

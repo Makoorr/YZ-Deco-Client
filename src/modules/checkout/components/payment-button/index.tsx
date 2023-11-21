@@ -53,9 +53,33 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ paymentSession }) => {
       return (
         <PayPalPaymentButton notReady={notReady} session={paymentSession} />
       )
+    case "konnect":
+      return (
+        <KonnectPaymentButton session={paymentSession} notReady={notReady} />
+      )
     default:
       return <Button disabled>Choisir méthode de paiement</Button>
   }
+}
+
+const KonnectPaymentButton = ({ session, notReady }: { session: PaymentSession, notReady: boolean}) => {
+  const [submitting, setSubmitting] = useState(false)
+
+  const { onKonnectPaymentCompleted } = useCheckout()
+
+  const handlePayment = () => {
+    setSubmitting(true)
+
+    onKonnectPaymentCompleted(session.data.payUrl as string)
+    
+    setSubmitting(false)
+  }
+
+  return (
+    <Button disabled={submitting || notReady} onClick={handlePayment}>
+      {submitting ? <Spinner /> : "Commander"}
+    </Button>
+  )
 }
 
 const StripePaymentButton = ({

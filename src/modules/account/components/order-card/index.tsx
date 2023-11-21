@@ -4,6 +4,7 @@ import Thumbnail from "@modules/products/components/thumbnail"
 import { formatAmount } from "medusa-react"
 import Link from "next/link"
 import { useMemo } from "react"
+import { formatTNDAmount } from "../../../../lib/util/tnd-price"
 
 type OrderCardProps = {
   order: Omit<Order, "beforeInsert">
@@ -28,11 +29,11 @@ const OrderCard = ({ order }: OrderCardProps) => {
           {new Date(order.created_at).toDateString()}
         </span>
         <span className="px-2">
-          {formatAmount({
+          {(order.region.currency_code !== "tnd") ? formatAmount({
             amount: order.total,
             region: order.region,
             includeTaxes: false,
-          })}
+          }) : formatTNDAmount(order.total)}
         </span>
         <span className="pl-2">{`${numberOfLines} ${
           numberOfLines > 1 ? "items" : "item"

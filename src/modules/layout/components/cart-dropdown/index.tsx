@@ -11,6 +11,7 @@ import { formatAmount, useCart } from "medusa-react"
 import Link from "next/link"
 import { Fragment } from "react"
 import Cart from "@modules/common/icons/cart"
+import { formatTNDAmount } from "../../../../lib/util/tnd-price"
 
 const CartDropdown = () => {
   const { cart, totalItems } = useCart()
@@ -100,15 +101,17 @@ const CartDropdown = () => {
                 <div className="p-4 flex flex-col gap-y-4 text-small-regular">
                   <div className="flex items-center justify-between">
                     <span className="text-gray-700 font-semibold">
-                      Sous-total{" "}
-                      <span className="font-normal">(incl. taxes)</span>
+                      Total{" "}
+                      <span className="font-normal">(taxes incluses)</span>
                     </span>
                     <span className="text-large-semi">
-                      {formatAmount({
-                        amount: cart.subtotal || 0,
-                        region: cart.region,
-                        includeTaxes: false,
-                      })}
+                      {(cart.region?.currency_code !== "tnd") ?
+                        formatAmount({
+                          amount: cart.subtotal || 0,
+                          region: cart.region,
+                          includeTaxes: false,
+                        }) : formatTNDAmount(cart.total as number)
+                      }
                     </span>
                   </div>
                   <Link href="/cart" passHref>

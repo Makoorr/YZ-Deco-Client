@@ -9,6 +9,7 @@ import { formatAmount, useCart, useCartShippingOptions } from "medusa-react"
 import React, { useEffect, useMemo } from "react"
 import { Controller, useForm } from "react-hook-form"
 import StepContainer from "../step-container"
+import { formatTNDAmount } from "../../../../lib/util/tnd-price"
 
 type ShippingOption = {
   value?: string
@@ -80,10 +81,10 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
       return shipping_options?.map((option) => ({
         value: option.id,
         label: option.name,
-        price: formatAmount({
+        price: (cart.region.currency_code !== "tnd") ? formatAmount({
           amount: option.amount || 0,
           region: cart.region,
-        }),
+        }) : formatTNDAmount(option.amount || 0),
       }))
     }
 
