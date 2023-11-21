@@ -79,15 +79,15 @@ const Nav = () => {
             </Link>
           </div>
 
-          <div className="flex items-center gap-x-3 h-full flex-1 basis-0 justify-end">
-            <div className="hidden small:flex items-center gap-x-6 h-full">
+          <div className="flex items-end h-full flex-1 basis-0 justify-end gap-4">
+            <div className="flex h-full">
               {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
               <Link href="/account">
-                <div className="grid grid-cols-3 gap-0">
-                  <div className="col-span-2">Mon Compte </div>
+                <div className="flex flex-col pt-3 items-center">
                   <User className="justify-self-center" size={20}></User>
+                  <div className="col-span-2 font-bold text-sm">Profile</div>
                 </div>
-                </Link>
+              </Link>
             </div>
             <CartDropdown />
           </div>

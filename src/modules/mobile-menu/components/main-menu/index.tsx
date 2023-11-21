@@ -7,6 +7,7 @@ import X from "@modules/common/icons/x"
 import { useCollections, useMeCustomer } from "medusa-react"
 import Link from "next/link"
 import ReactCountryFlag from "react-country-flag"
+import User from "../../../common/icons/user"
 
 const MainMenu = () => {
   const { collections } = useCollections()
@@ -114,7 +115,7 @@ const MainMenu = () => {
             ) : (
               <div className="flex flex-col gap-y-4">
                 <span className="text-gray-700 uppercase">Connecté en tant que</span>
-                <Link href={`/account`} passHref>
+                {/* <Link href={`/account`} passHref>
                   <button
                     className="flex items-center justify-between border-b border-gray-200 py-2 w-full"
                     onClick={close}
@@ -123,6 +124,15 @@ const MainMenu = () => {
                     <span className="normal-case">{customer.email}</span>
                     <ChevronDown className="-rotate-90" />
                   </button>
+                </Link> */}
+                <Link href="/account" passHref>
+                  <div className="flex flex-row justify-between">
+                    <span className="normal-case">{customer.first_name} {customer.last_name}</span>
+                    <div className="flex flex-row gap-2">
+                      <User className="justify-self-center" size={20}></User>
+                      <ChevronDown className="-rotate-90" />
+                    </div>
+                  </div>
                 </Link>
               </div>
             )}
@@ -138,7 +148,7 @@ const MainMenu = () => {
                 <div className="flex items-center gap-x-2">
                   <ReactCountryFlag countryCode={countryCode || "us"} svg />
                   <span className="normal-case">
-                    Shipping to{" "}
+                    Livraison à{" "}
                     {countries?.find((c) => c.country === countryCode)?.label}
                   </span>
                 </div>
