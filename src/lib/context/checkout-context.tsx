@@ -57,7 +57,7 @@ interface CheckoutContext {
   setShippingOption: (soId: string) => void
   setPaymentSession: (providerId: string) => void
   onPaymentCompleted: () => void
-  onKonnectPaymentCompleted: (payUrl: string) => void
+  onKonnectPaymentCompleted: () => void
 }
 
 const CheckoutContext = createContext<CheckoutContext | null>(null)
@@ -324,11 +324,34 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
     })
   }
   
-  const onKonnectPaymentCompleted = (payUrl: string) => {
+  const onKonnectPaymentCompleted = () => {
+    // Générer le payUrl :
     complete(undefined, {
       onSuccess: ({ data }) => {
-        resetCart()
-        push(payUrl)
+        fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/konnect-payurl?cartId=${cart?.id}`, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        })
+          .then((response) => {
+            if (!response.ok)
+              throw new Error('Network response was not ok');
+            return response.json();
+          })
+          .then((res) => {
+            return res.payUrl;
+          })
+          .then((payUrl) => {
+            resetCart()
+            push(payUrl)
+          })
+          .catch((error) => {
+            console.log(error)
+            alert("Erreur lors du paiement")
+          })
       },
     })
   }
