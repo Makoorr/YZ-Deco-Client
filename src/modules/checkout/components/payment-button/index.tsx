@@ -70,7 +70,7 @@ const KonnectPaymentButton = ({ session, notReady }: { session: PaymentSession, 
   const handlePayment = () => {
     setSubmitting(true)
 
-    onKonnectPaymentCompleted(session.data.payUrl as string)
+    onKonnectPaymentCompleted()
     
     setSubmitting(false)
   }
