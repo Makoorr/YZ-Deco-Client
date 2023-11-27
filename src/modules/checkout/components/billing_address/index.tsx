@@ -1,9 +1,11 @@
 import { CheckoutFormValues } from "@lib/context/checkout-context"
 import ConnectForm from "@modules/common/components/connect-form"
 import Input from "@modules/common/components/input"
-import CountrySelect from "../country-select"
+import TunisianCitiesSelect from "../tunisian-countries-select"
+import { useCart } from "medusa-react"
 
 const BillingAddress = () => {
+  const { cart } = useCart()
   return (
     <ConnectForm<CheckoutFormValues>>
       {({ register, formState: { errors, touchedFields } }) => (
@@ -28,71 +30,49 @@ const BillingAddress = () => {
               touched={touchedFields}
             />
           </div>
-          <Input
-            label="Etablissement"
-            {...register("billing_address.company")}
-            autoComplete="organization"
-            errors={errors}
-            touched={touchedFields}
-          />
-          <Input
-            label="Adresse"
-            {...register("billing_address.address_1", {
-              required: "Adresse est requise",
-            })}
-            autoComplete="address-line1"
-            errors={errors}
-            touched={touchedFields}
-          />
-          <Input
-            label="Appartements, suite, etc."
-            {...register("billing_address.address_2")}
-            autoComplete="address-line2"
-            errors={errors}
-            touched={touchedFields}
-          />
-          <div className="grid grid-cols-[144px_1fr] gap-x-2">
-            <Input
-              label="Code Postal"
-              {...register("billing_address.postal_code", {
-                required: "Code Postal est requise",
-              })}
-              autoComplete="postal-code"
-              errors={errors}
-              touched={touchedFields}
-            />
-            <Input
-              label="Ville"
-              {...register("billing_address.city", {
-                required: "Ville est requise",
-              })}
-              autoComplete="address-level2"
-              errors={errors}
-              touched={touchedFields}
-            />
-          </div>
-          <CountrySelect
-            {...register("billing_address.country_code", {
-              required: "Pays requis",
-            })}
-            autoComplete="country"
-            errors={errors}
-            touched={touchedFields}
-          />
-          <Input
-            label="Etat / Province"
-            {...register("billing_address.province")}
-            autoComplete="address-level1"
-            errors={errors}
-            touched={touchedFields}
-          />
-          <Input
-            label="Téléphone"
-            {...register("billing_address.phone")}
-            autoComplete="tel"
-            errors={errors}
-            touched={touchedFields}
-          />
+          <div className="grid grid-cols-3 gap-x-3">
+              <Input
+                label="Téléphone"
+                {...register("shipping_address.phone")}
+                autoComplete="tel"
+                errors={errors}
+                touched={touchedFields}
+                minLength={8}
+                maxLength={8}
+              />
+              {(cart?.region.currency_code == "tnd") ? (
+                  <TunisianCitiesSelect
+                    registerCity={register("shipping_address.city", {
+                      required: "Ville requise",
+                    })}
+                    registerProvince={register("shipping_address.province")}
+                    autoComplete="address-level2"
+                    errors={errors}
+                    touched={touchedFields}
+                  />
+              ):(
+                <>
+                  <Input
+                    label="Ville"
+                    {...register("shipping_address.city", {
+                      required: "Ville requise",
+                    })}
+                    autoComplete="address-level2"
+                    errors={errors}
+                    touched={touchedFields}
+                  />
+                  <Input
+                    label="Adresse"
+                    {...register("shipping_address.address_1", {
+                      required: "Adresse requise",
+                    })}
+                    autoComplete="address-line1"
+                    errors={errors}
+                    touched={touchedFields}
+                  />
+                </>
+                )}
+            </div>
         </div>
       )}
     </ConnectForm>

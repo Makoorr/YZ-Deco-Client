@@ -1,5 +1,6 @@
 import medusaRequest from "../medusa-fetch"
 import { StoreGetProductsParams } from "@medusajs/medusa"
+import tunisianData from './tn.json'
 
 /**
  * This file contains functions for fetching products and collections from the Medusa API or the Medusa Product Module,
@@ -15,6 +16,36 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000"
 
 // Set DEBUG to true to console.log where the data is coming from.
 const DEBUG = false
+
+/**
+ * Fetches all tunisian Cities from tn.json in this data folder and returns it.
+ * @returns (array) - An array of Cities in Tunisia
+ */
+export function getTunisianCities() {
+  const cities = [];
+
+  for (const city in tunisianData) {
+    cities.push(city);
+  }
+
+  return {cities};
+}
+
+/**
+ * Fetches all tunisian cities from tn.json in this data folder and returns it.
+ * @returns (array) - An array of zones in a city
+ */
+export function getTunisianZonesIn(cityName?: string) {
+  if (!cityName) return [];
+
+  const zones = [];
+  for (const [region, cities] of Object.entries(tunisianData)) {
+    if (region.includes(cityName))
+      zones.push(...cities);
+  }
+
+  return zones
+}
 
 /**
  * Fetches a product by handle, using the Medusa API or the Medusa Product Module, depending on the feature flag.
