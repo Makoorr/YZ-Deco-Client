@@ -3,7 +3,7 @@ import Link from "next/link"
 
 type UnderlineLinkProps = {
   href: string
-  arrow: boolean
+  arrow?: boolean
   className?: string
   children?: React.ReactNode
 }
