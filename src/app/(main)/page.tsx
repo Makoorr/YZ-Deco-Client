@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const Home = () => {
   return (
-    <>
+    <div>
       <Hero />
       <hr className="xsmall:mt-8 mt-4"
         style={{
@@ -37,7 +37,7 @@ const Home = () => {
           borderTop: "3px solid #00000020",
         }}
       ></hr>
-    </>
+    </div>
   )
 }
 

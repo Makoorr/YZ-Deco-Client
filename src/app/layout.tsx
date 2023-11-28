@@ -10,7 +10,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <main className="relative">{children}</main>
+          <main className="bg-stone-100 relative">{children}</main> {/* bg-gradient-to-l from-pink-300 to-orange-200 */}
         </Providers>
       </body>
     </html>

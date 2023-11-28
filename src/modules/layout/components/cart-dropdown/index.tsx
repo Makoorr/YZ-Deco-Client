@@ -121,11 +121,13 @@ const CartDropdown = () => {
               </>
             ) : (
               <div>
-                <div className="flex py-16 flex-col gap-y-4 items-center justify-center">
-                  <div className="bg-gray-900 text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
-                    <span>0</span>
+                <div className="flex py-8 flex-col gap-y-6 items-center justify-center">
+                  <div className="flex flex-col items-center justify-center gap-y-1">
+                    <div className="bg-gradient-to-r from-purple-700 via-pink-600 to-orange-400 text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
+                      <span>0</span>
+                    </div>
+                    <span>Votre panier est vide.</span>
                   </div>
-                  <span>Votre panier est vide.</span>
                   <div>
                     <Link href="/store">
                       <>

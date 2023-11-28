@@ -9,7 +9,7 @@ const FeaturedProducts = () => {
 
   return (
     <div>
-      <div className="content-container py-12">
+      <div className="bg-zinc-200 my-6 border-1 rounded-md shadow-lg content-container py-12">
         <div className="flex flex-col items-center text-center mb-16">
           <span className="text-base-regular text-gray-600 mb-6">
           Derniers produits
