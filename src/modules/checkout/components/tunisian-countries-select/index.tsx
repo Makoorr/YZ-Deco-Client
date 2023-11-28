@@ -27,7 +27,6 @@ const TunisianCitiesSelect = forwardRef<HTMLSelectElement, TunisianCitiesSelectP
     const handleCityChange = (event: ChangeEvent<HTMLSelectElement>) => {
       const newSelectedCity = event.target.value;
       setSelectedCity(newSelectedCity);
-      console.log(regions);
 
       setRegions(getTunisianZonesIn(newSelectedCity));
     };

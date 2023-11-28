@@ -2,10 +2,11 @@ import { useAccount } from "@lib/context/account-context"
 import { Customer, StorePostCustomersCustomerReq } from "@medusajs/medusa"
 import Input from "@modules/common/components/input"
 import NativeSelect from "@modules/common/components/native-select"
-import { useRegions, useUpdateMe } from "medusa-react"
+import { useCart, useRegions, useUpdateMe } from "medusa-react"
 import React, { useEffect, useMemo } from "react"
 import { useForm, useWatch } from "react-hook-form"
 import AccountInfo from "../account-info"
+import TunisianCitiesSelect from "../../../checkout/components/tunisian-countries-select"
 
 type MyInformationProps = {
   customer: Omit<Customer, "password_hash">
@@ -17,6 +18,7 @@ type UpdateCustomerNameFormData = Pick<
 >
 
 const ProfileBillingAddress: React.FC<MyInformationProps> = ({ customer }) => {
+  const { cart } = useCart()
   const {
     register,
     handleSubmit,
@@ -121,8 +123,6 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({ customer }) => {
           {customer.billing_address.address_2
             ? `, ${customer.billing_address.address_2}`
             : ""}
-        </span>
-        <span>
           {customer.billing_address.postal_code},{" "}
           {customer.billing_address.city}
         </span>
@@ -146,73 +146,90 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({ customer }) => {
         clearState={clearState}
       >
         <div className="grid grid-cols-1 gap-y-2">
-          <div className="grid grid-cols-2 gap-x-2">
-            <Input
-              label="Prénom"
-              {...register("billing_address.first_name", {
-                required: true,
-              })}
-              defaultValue={firstName}
-              errors={errors}
-            />
-            <Input
-              label="Nom"
-              {...register("billing_address.last_name", { required: true })}
-              defaultValue={lastName}
-              errors={errors}
-            />
-          </div>
           <Input
-            label="Etablissement"
-            {...register("billing_address.company")}
-            defaultValue={company}
+            label="Prénom"
+            {...register("billing_address.first_name", {
+              required: true,
+            })}
+            defaultValue={firstName}
             errors={errors}
           />
+          <Input
+            label="Nom"
+            {...register("billing_address.last_name", { required: true })}
+            defaultValue={lastName}
+            errors={errors}
+          />
+          <div className="grid grid-cols-[144px_1fr] gap-x-2">
+            {(cart?.region?.currency_code == "tnd") ? (
+            <>
+              <TunisianCitiesSelect
+                registerCity={register("billing_address.city", {
+                  required: "Ville requise",
+                })}
+                registerProvince={register("billing_address.province")}
+                autoComplete="address-level2"
+                errors={errors} />
+            </>
+            ):(
+            <>
+              <Input
+                label="Ville"
+                {...register("billing_address.city", {
+                  required: "Ville requise",
+                })}
+                autoComplete="address-level2"
+                errors={errors}
+              />
+              <Input
+                label="Région"
+                {...register("billing_address.province", {
+                  required: "Région requise",
+                })}
+                autoComplete="address-line1"
+                errors={errors}
+              />
+            </>
+            )}
+          </div>
+
           <Input
             label="Adresse"
             {...register("billing_address.address_1", { required: true })}
             defaultValue={address1}
-            errors={errors}
-          />
-          <Input
-            label="Appartement, suite, etc."
-            {...register("billing_address.address_2")}
-            defaultValue={address2}
-            errors={errors}
-          />
-          <div className="grid grid-cols-[144px_1fr] gap-x-2">
-            <Input
-              label="Code postal"
-              {...register("billing_address.postal_code", { required: true })}
-              defaultValue={postalCode}
-              errors={errors}
-            />
-            <Input
-              label="Ville"
-              {...register("billing_address.city", { required: true })}
-              defaultValue={city}
-              errors={errors}
-            />
-          </div>
-          <Input
-            label="Province"
-            {...register("billing_address.province")}
-            defaultValue={province}
-            errors={errors}
-          />
-          <NativeSelect
-            {...register("billing_address.country_code", { required: true })}
-            defaultValue={countryCode}
-          >
-            <option value="">-</option>
-            {regionOptions.map((option, i) => {
-              return (
-                <option key={i} value={option.value}>
-                  {option.label}
-                </option>
-              )
-            })}
-          </NativeSelect>
+            errors={errors} />
+          
+          { (cart?.region?.currency_code == "tnd") ? (
+            <NativeSelect
+              {...register("billing_address.country_code", { required: true })}
+              defaultValue={countryCode}
+              className="hidden"
+              value={"tn"}
+            >
+              <option hidden value="">-</option>
+              {regionOptions.map((option, i) => {
+                return (
+                  <option key={i} value={option.value}>
+                    {option.label}
+                  </option>
+                )
+              })}
+            </NativeSelect>
+          ): (
+            <NativeSelect
+              {...register("billing_address.country_code", { required: true })}
+              defaultValue={countryCode}
+            >
+              <option value="">-</option>
+              {regionOptions.map((option, i) => {
+                return (
+                  <option key={i} value={option.value}>
+                    {option.label}
+                  </option>
+                )
+              })}
+            </NativeSelect>
+          )}
         </div>
       </AccountInfo>
     </form>

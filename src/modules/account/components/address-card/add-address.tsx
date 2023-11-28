@@ -7,8 +7,10 @@ import Input from "@modules/common/components/input"
 import Modal from "@modules/common/components/modal"
 import Plus from "@modules/common/icons/plus"
 import Spinner from "@modules/common/icons/spinner"
+import { useCart } from "medusa-react"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
+import TunisianCitiesSelect from "../../../checkout/components/tunisian-countries-select"
 
 type FormValues = {
   first_name: string
@@ -27,7 +29,8 @@ const AddAddress: React.FC = () => {
   const { state, open, close } = useToggleState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | undefined>(undefined)
-
+  
+  const { cart } = useCart()
   const { refetchCustomer } = useAccount()
   const {
     register,
@@ -59,14 +62,14 @@ const AddAddress: React.FC = () => {
     const payload = {
       first_name: data.first_name,
       last_name: data.last_name,
-      company: data.company || "",
+      company: data?.company || "",
       address_1: data.address_1,
-      address_2: data.address_2 || "",
-      city: data.city,
-      country_code: data.country_code,
-      province: data.province || "",
-      postal_code: data.postal_code,
-      phone: data.phone || "",
+      address_2: data?.address_2 || "",
+      city: data?.city || "",
+      country_code: (cart?.region.currency_code === "tnd") ? "tn" : (data?.country_code || ""),
+      province: data?.province || "",
+      postal_code: data?.postal_code || "",
+      phone: data?.phone || "",
       metadata: {},
     }
 
@@ -79,7 +82,7 @@ const AddAddress: React.FC = () => {
       })
       .catch(() => {
         setSubmitting(false)
-        setError("Erreur lors d&apos;ajout d&apos;adresse.")
+        setError("Erreur lors de l'ajout de l'adresse.")
       })
   })
 
@@ -97,76 +100,68 @@ const AddAddress: React.FC = () => {
         <Modal.Title>Ajouter votre adresse</Modal.Title>
         <Modal.Body>
           <div className="grid grid-cols-1 gap-y-2">
-            <div className="grid grid-cols-2 gap-x-2">
-              <Input
-                label="Prénom"
-                {...register("first_name", {
-                  required: "Prénom requis",
-                })}
-                required
-                errors={errors}
-                autoComplete="given-name"
-              />
-              <Input
-                label="Nom"
-                {...register("last_name", {
-                  required: "Nom requis",
-                })}
-                required
-                errors={errors}
-                autoComplete="family-name"
-              />
-            </div>
-            <Input label="Etablissement" {...register("company")} errors={errors} />
             <Input
-              label="Adresse"
-              {...register("address_1", {
-                required: "Adresse requise",
+              label="Prénom"
+              {...register("first_name", {
+                required: "Prénom requis",
               })}
               required
               errors={errors}
-              autoComplete="address-line1"
+              autoComplete="given-name"
             />
             <Input
-              label="Appartement, suite, etc."
-              {...register("address_2")}
+              label="Nom"
+              {...register("last_name", {
+                required: "Nom requis",
+              })}
+              required
               errors={errors}
-              autoComplete="address-line2"
+              autoComplete="family-name"
             />
-            <div className="grid grid-cols-[144px_1fr] gap-x-2">
-              <Input
-                label="Code postal"
-                {...register("postal_code", {
-                  required: "Code Postal requis",
-                })}
-                required
-                errors={errors}
-                autoComplete="postal-code"
-              />
-              <Input
-                label="Ville"
-                {...register("city", {
-                  required: "Ville requise",
-                })}
-                errors={errors}
-                required
-                autoComplete="locality"
-              />
+            <div className="grid grid-cols-2 gap-x-2">
+              {(cart?.region?.currency_code == "tnd") ? (
+              <>
+                <TunisianCitiesSelect
+                  registerCity={register("city", {
+                    required: "Ville requise",
+                  })}
+                  registerProvince={register("province")}
+                  autoComplete="address-level2"
+                  errors={errors} />
+              </>
+              ):(
+              <>
+                <Input
+                  label="Ville"
+                  {...register("city", {
+                    required: "Ville requise",
+                  })}
+                  autoComplete="address-level2"
+                  errors={errors}
+                />
+                <Input
+                  label="Région"
+                  {...register("province", {
+                    required: "Région requise",
+                  })}
+                  autoComplete="address-line1"
+                  errors={errors}
+                />
+              </>
+              )}
             </div>
+
             <Input
-              label="Province / Etat"
-              {...register("province")}
-              errors={errors}
-              autoComplete="address-level1"
-            />
-            <CountrySelect
-              {...register("country_code", { required: true })}
-              autoComplete="country"
-            />
+              label="Adresse"
+              {...register("address_1", { required: true })}
+              errors={errors} />
             <Input
               label="Téléphone"
               {...register("phone")}
               errors={errors}
+              minLength={8}
+              maxLength={8}
+              type="number"
               autoComplete="phone"
             />
           </div>

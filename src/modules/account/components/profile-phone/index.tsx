@@ -78,6 +78,8 @@ const ProfilePhone: React.FC<MyInformationProps> = ({ customer }) => {
             {...register("phone", {
               required: true,
             })}
+            maxLength={8}
+            minLength={8}
             defaultValue={phone}
             errors={errors}
           />

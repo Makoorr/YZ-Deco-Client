@@ -10,8 +10,10 @@ import Edit from "@modules/common/icons/edit"
 import Spinner from "@modules/common/icons/spinner"
 import Trash from "@modules/common/icons/trash"
 import clsx from "clsx"
+import { useCart } from "medusa-react"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
+import TunisianCitiesSelect from "../../../checkout/components/tunisian-countries-select"
 
 type FormValues = {
   first_name: string
@@ -39,6 +41,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | undefined>(undefined)
 
+  const { cart } = useCart()
   const { refetchCustomer } = useAccount()
   const {
     register,
@@ -66,14 +69,14 @@ const EditAddress: React.FC<EditAddressProps> = ({
     const payload = {
       first_name: data.first_name,
       last_name: data.last_name,
-      company: data.company || "Personal",
+      company: data?.company || "",
       address_1: data.address_1,
-      address_2: data.address_2 || "",
-      city: data.city,
-      country_code: data.country_code,
-      province: data.province || "",
-      postal_code: data.postal_code,
-      phone: data.phone || "None",
+      address_2: data?.address_2 || "",
+      city: data?.city || "",
+      country_code: (cart?.region.currency_code === "tnd") ? "tn" : (data?.country_code || ""),
+      province: data?.province || "",
+      postal_code: data?.postal_code || "",
+      phone: data?.phone || "",
       metadata: {},
     }
 
@@ -121,10 +124,10 @@ const EditAddress: React.FC<EditAddressProps> = ({
               {address.address_2 && <span>, {address.address_2}</span>}
             </span>
             <span>
-              {address.postal_code}, {address.city}
+              {address.postal_code && `${address.postal_code},`} {address.city && `${address.city}, `}
+              {address.province && `${address.province}`}
             </span>
             <span>
-              {address.province && `${address.province}, `}
               {address.country_code?.toUpperCase()}
             </span>
           </div>
@@ -148,79 +151,71 @@ const EditAddress: React.FC<EditAddressProps> = ({
       </div>
 
       <Modal isOpen={state} close={close}>
-        <Modal.Title>Edit address</Modal.Title>
+        <Modal.Title>Modifier votre adresse</Modal.Title>
         <Modal.Body>
           <div className="grid grid-cols-1 gap-y-2">
-            <div className="grid grid-cols-2 gap-x-2">
-              <Input
-                label="Prénom"
-                {...register("first_name", {
-                  required: "Prénom est requis",
-                })}
-                required
-                errors={errors}
-                autoComplete="given-name"
-              />
-              <Input
-                label="Nom"
-                {...register("last_name", {
-                  required: "Nom est requis",
-                })}
-                required
-                errors={errors}
-                autoComplete="family-name"
-              />
-            </div>
-            <Input label="Etablissement" {...register("company")} errors={errors} />
-            <Input
-              label="Adresse"
-              {...register("address_1", {
-                required: "Adresse requise",
+          <Input
+              label="Prénom"
+              {...register("first_name", {
+                required: "Prénom requis",
               })}
               required
               errors={errors}
-              autoComplete="address-line1"
+              autoComplete="given-name"
             />
             <Input
-              label="Appartement, suite, etc."
-              {...register("address_2")}
+              label="Nom"
+              {...register("last_name", {
+                required: "Nom requis",
+              })}
+              required
               errors={errors}
-              autoComplete="address-line2"
+              autoComplete="family-name"
             />
-            <div className="grid grid-cols-[144px_1fr] gap-x-2">
-              <Input
-                label="Code Postal"
-                {...register("postal_code", {
-                  required: "Code postal requis",
-                })}
-                required
-                errors={errors}
-                autoComplete="postal-code"
-              />
-              <Input
-                label="Ville"
-                {...register("city", {
-                  required: "Ville requise",
-                })}
-                errors={errors}
-                required
-                autoComplete="locality"
-              />
+            <div className="grid grid-cols-2 gap-x-2">
+              {(cart?.region?.currency_code == "tnd") ? (
+              <>
+                <TunisianCitiesSelect
+                  registerCity={register("city", {
+                    required: "Ville requise",
+                  })}
+                  registerProvince={register("province")}
+                  autoComplete="address-level2"
+                  errors={errors} />
+              </>
+              ):(
+              <>
+                <Input
+                  label="Ville"
+                  {...register("city", {
+                    required: "Ville requise",
+                  })}
+                  autoComplete="address-level2"
+                  errors={errors}
+                />
+                <Input
+                  label="Région"
+                  {...register("province", {
+                    required: "Région requise",
+                  })}
+                  autoComplete="address-line1"
+                  errors={errors}
+                />
+              </>
+              )}
             </div>
+
             <Input
-              label="Province / Etat"
-              {...register("province")}
-              errors={errors}
-              autoComplete="address-level1"
-            />
-            <CountrySelect
-              {...register("country_code", { required: true })}
-              autoComplete="Pays"
-            />
+              label="Adresse"
+              {...register("address_1", { required: true })}
+              errors={errors} />
             <Input
               label="Téléphone"
               {...register("phone")}
               errors={errors}
+              minLength={8}
+              maxLength={8}
+              type="number"
               autoComplete="phone"
             />
           </div>

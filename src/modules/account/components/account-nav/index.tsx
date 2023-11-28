@@ -41,7 +41,7 @@ const AccountNav = () => {
               </li>
               <li>
                 <AccountNavLink href="/account/addresses" route={route!}>
-                Adresses
+                Adresses de livraison
                 </AccountNavLink>
               </li>
               <li>
