@@ -3,7 +3,7 @@ import Button from "@modules/common/components/button"
 import Thumbnail from "@modules/products/components/thumbnail"
 import { formatAmount } from "medusa-react"
 import Link from "next/link"
-import { useMemo } from "react"
+import { useMemo, useRef } from "react"
 import { formatTNDAmount } from "../../../../lib/util/tnd-price"
 
 type OrderCardProps = {
@@ -20,6 +20,32 @@ const OrderCard = ({ order }: OrderCardProps) => {
   const numberOfProducts = useMemo(() => {
     return order.items.length
   }, [order])
+
+  
+  const linkRef = useRef<HTMLInputElement>(null);
+
+  const genererPaiement = async () => {
+    if (linkRef?.current) {
+      try {
+        linkRef.current.innerHTML = "Chargement...";
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL}/konnect-payurl?cartId=${order.cart_id}`, {
+          method: 'POST',
+          body: JSON.stringify(order),
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+          },
+        })
+        if (!response.ok)
+          throw new Error(response.statusText)
+        const data = await response.json()
+        linkRef.current.innerHTML = `<a href=${data.payUrl} style='color: blue;' target='_blank' rel='noopener noreferrer'>Lien du paiement</a>`;
+      } catch (error) {
+        linkRef.current.innerHTML = `<a style='color: red;'>Erreur</a>`;
+      }
+    }
+  }
 
   return (
     <div className="bg-white flex flex-col">
@@ -65,8 +91,16 @@ const OrderCard = ({ order }: OrderCardProps) => {
           </div>
         )}
       </div>
-      <div className="flex justify-end">
-        <Link href={`/order/details/${order.id}`}>
+      <div className="flex justify-end gap-2 items-center">
+        {(order.payment_status !== "captured") ? (
+          <div className="flex items-center space-x-2">
+              <Button onClick={genererPaiement} variant="secondary" className="min-w-[130px]">
+              Génerer lien du paiement
+              </Button>
+          </div>
+        ) : <span className="text-green-600 font-medium">Commande payé!</span>}
+        <div ref={linkRef} className="flex flex-row items-center gap-5"></div> {/* Lien du paiement */}
+        <Link href={`/order/details/${order.id}`} target="_blank" rel="noopener noreferrer">
           <Button variant="secondary">Voir détails</Button>
         </Link>
       </div>
