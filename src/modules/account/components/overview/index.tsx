@@ -6,6 +6,8 @@ import User from "@modules/common/icons/user"
 import { formatAmount } from "medusa-react"
 import Link from "next/link"
 import { formatTNDAmount } from "../../../../lib/util/tnd-price"
+import Button from "../../../common/components/button"
+import { useAccount } from "../../../../lib/context/account-context"
 
 type OverviewProps = {
   orders?: Order[]
@@ -13,6 +15,8 @@ type OverviewProps = {
 }
 
 const Overview = ({ orders, customer }: OverviewProps) => {
+  const { handleLogout } = useAccount()
+  
   return (
     <div>
       <div className="small:hidden">
@@ -62,6 +66,11 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                   <ChevronDown className="transform -rotate-90" />
                 </>
               </Link>
+            </li>
+            <li className="mt-2 mr-6 flex justify-end">
+              <Button variant="secondary" className="text-grey-700 w-max" onClick={handleLogout}>
+                Se déconnecter
+              </Button>
             </li>
           </ul>
         </div>

@@ -82,7 +82,7 @@ const Nav = () => {
             </Link>
           </div>
 
-          <div className="flex items-end h-full flex-1 basis-0 justify-end gap-4">
+          <div className="flex items-end h-full flex-1 basis-0 justify-end gap-1 md:gap-4">
             <div className="flex h-full">
               {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
               <Link href="/account">
@@ -95,7 +95,7 @@ const Nav = () => {
                 ) : (
                   <>
                     <Login className="justify-self-center" size={20}></Login>
-                    <div className="col-span-2 font-bold text-sm">Se connecter</div>
+                    <div className="col-span-2 font-bold text-xs md:text-sm">Se connecter</div>
                   </>
                 )}
                 </div>

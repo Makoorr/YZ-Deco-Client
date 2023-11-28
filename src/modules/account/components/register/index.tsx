@@ -49,7 +49,7 @@ const Register = () => {
           <Spinner size={24} />
         </div>
       )}
-      <h1 className="text-large-semi uppercase mb-6">Devenir membre de Y&Z Deco</h1>
+      <h1 className="text-large-semi uppercase mb-6">Devenir membre chez Y&Z Deco</h1>
       <p className="text-center text-base-regular text-gray-700 mb-4">
       Créez votre profil et accédez à une expérience d&apos;achat améliorée.
       </p>
@@ -74,7 +74,7 @@ const Register = () => {
             errors={errors}
           />
           <Input
-            label="Phone"
+            label="Téléphone"
             {...register("phone")}
             autoComplete="tel"
             errors={errors}
@@ -96,7 +96,7 @@ const Register = () => {
             </span>
           </div>
         )}
-        <span className="text-center text-gray-700 text-small-regular mt-6">
+        {/* <span className="text-center text-gray-700 text-small-regular mt-6">
           En créant un compte, vous acceptez{" "}
           <Link href="/content/privacy-policy" className="underline">
           les conditions d&apos;utilisation
@@ -106,14 +106,14 @@ const Register = () => {
           politique de confidentialité
           </Link> {" "}
           de Y&Z Deco.
-        </span>
+        </span> */}
         <Button className="mt-6">Rejoignez-nous</Button>
       </form>
-      <span className="text-center text-gray-700 text-small-regular mt-6">
+      <span className="text-center text-gray-700 text-md mt-6">
         Déjà membre?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
-          className="underline"
+          className="font-bold underline"
         >
           Se connecter
         </button>

@@ -74,13 +74,13 @@ const Login = () => {
         )}
         <Button className="mt-6">Envoyer</Button>
       </form>
-      <span className="text-center text-gray-700 text-small-regular mt-6">
+      <span className="text-center text-gray-700 text-md mt-6">
         Pas encore membre?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
-          className="underline"
+          className="font-bold underline"
         >
-          Rejoignez-nous
+          Créer un compte
         </button>
         .
       </span>

@@ -27,9 +27,6 @@ const AccountNav = () => {
       </div>
       <div className="hidden small:block">
         <div>
-          {/* <div className="py-4">
-            <h3 className="text-base-semi">Mon Compte</h3>
-          </div> */}
           <div className="text-base-regular">
             <ul className="flex mb-0 justify-start items-start flex-col gap-y-4">
               <li>
