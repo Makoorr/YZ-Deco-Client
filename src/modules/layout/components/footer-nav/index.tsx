@@ -20,8 +20,8 @@ const FooterNav = () => {
           <div className="flex flex-col gap-y-2">
             <span className="text-base-semi">Nos Collections</span>
             <ul
-              className={clsx("grid grid-cols-1 gap-y-2", {
-                "grid-cols-2": (collections?.length || 0) > 4,
+              className={clsx("grid grid-cols-1 gap-2", {
+                "grid-cols-2 gap-2": (collections?.length || 0) > 4,
               })}
             >
               {collections?.map((c) => (

@@ -3,6 +3,8 @@ import ChevronDown from "@modules/common/icons/chevron-down"
 import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import Button from "../../../common/components/button"
+import UnderlineLink from "../../../common/components/underline-link"
 
 const AccountNav = () => {
   const route = usePathname()
@@ -18,16 +20,16 @@ const AccountNav = () => {
           >
             <>
               <ChevronDown className="transform rotate-90" />
-              <span>Mon Compte</span>
+              {/* <span>Mon Compte</span> */}
             </>
           </Link>
         )}
       </div>
       <div className="hidden small:block">
         <div>
-          <div className="py-4">
+          {/* <div className="py-4">
             <h3 className="text-base-semi">Mon Compte</h3>
-          </div>
+          </div> */}
           <div className="text-base-regular">
             <ul className="flex mb-0 justify-start items-start flex-col gap-y-4">
               <li>
@@ -51,9 +53,9 @@ const AccountNav = () => {
                 </AccountNavLink>
               </li>
               <li className="text-grey-700">
-                <button type="button" onClick={handleLogout}>
+                <Button variant="secondary" onClick={handleLogout}>
                   Se déconnecter
-                </button>
+                </Button>
               </li>
             </ul>
           </div>
@@ -72,14 +74,15 @@ type AccountNavLinkProps = {
 const AccountNavLink = ({ href, route, children }: AccountNavLinkProps) => {
   const active = route === href
   return (
-    <Link
+    <UnderlineLink
       href={href}
-      className={clsx("text-gray-700", {
-        "text-gray-900 font-semibold": active,
+      arrow={false}
+      className={clsx({
+        "text-gray-900 font-semibold text-xl pl-4 pr-1": active,
       })}
     >
       <>{children}</>
-    </Link>
+    </UnderlineLink>
   )
 }
 
