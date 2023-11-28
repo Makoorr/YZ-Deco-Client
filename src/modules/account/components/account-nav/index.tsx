@@ -16,11 +16,11 @@ const AccountNav = () => {
         {route !== "/account" && (
           <Link
             href="/account"
-            className="flex items-center gap-x-2 text-small-regular py-2"
+            className="flex items-center gap-x-2 text-small-regular w-max py-2 pl-4"
           >
             <>
               <ChevronDown className="transform rotate-90" />
-              {/* <span>Mon Compte</span> */}
+              <span className="text-lg">Retour</span>
             </>
           </Link>
         )}
