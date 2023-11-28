@@ -27,13 +27,13 @@ const LineItemPrice = ({
           "text-rose-600": hasReducedPrice,
         })}
       >
-        { (region.currency_code !== "tnd" || !(item.total)) ? (
+        { (region.currency_code !== "tnd" || !(item.subtotal)) ? (
           formatAmount({
-            amount: item.total || 0,
+            amount: item.subtotal || 0,
             region: region,
             includeTaxes: false,
           })
-        ) : formatTNDAmount(item.total)}
+        ) : formatTNDAmount(item.subtotal)}
       </span>
       {hasReducedPrice && (
         <>
