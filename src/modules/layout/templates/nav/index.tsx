@@ -11,11 +11,14 @@ import clsx from "clsx"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import { useAccount } from "../../../../lib/context/account-context"
+import Login from "../../../common/icons/login"
 
 const Nav = () => {
   const pathname = usePathname()
   const [isHome, setIsHome] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false)
+  const { customer, retrievingCustomer, refetchCustomer } = useAccount()
 
   //useEffect that detects if window is scrolled > 5px on the Y axis
   useEffect(() => {
@@ -84,8 +87,17 @@ const Nav = () => {
               {process.env.FEATURE_SEARCH_ENABLED && <DesktopSearchModal />}
               <Link href="/account">
                 <div className="flex flex-col pt-3 items-center">
-                  <User className="justify-self-center" size={20}></User>
-                  <div className="col-span-2 font-bold text-sm">Profile</div>
+                {customer ? (
+                  <>
+                    <User className="justify-self-center" size={20}></User>
+                    <div className="col-span-2 font-bold text-sm">Profile</div>
+                  </>
+                ) : (
+                  <>
+                    <Login className="justify-self-center" size={20}></Login>
+                    <div className="col-span-2 font-bold text-sm">Se connecter</div>
+                  </>
+                )}
                 </div>
               </Link>
             </div>
