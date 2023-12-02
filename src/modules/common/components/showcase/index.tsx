@@ -12,7 +12,7 @@ type LayoutCollection = {
 const Showcase = (content: any) => {
     const data: LayoutCollection[] = content.content;
 
-    if (data != undefined) 
+    if (data != undefined && data.length > 0 && data[0]?.handle && data[0]?.imageURL) 
         return (
             <div className="grid small:grid-cols-2 small:gap-x-4 grid-cols-1 gap-2 p-2">
                 <div className="border-2 rounded-md small:h-full h-64 w-fit place-self-center h-fit bg-gray-100 shadow-lg w-5/6 overflow-hidden">
