@@ -24,6 +24,11 @@ const Item = ({ item, region }: ItemProps) => {
           <div className="flex flex-col">
             <span>{item.title}</span>
             <LineItemOptions variant={item.variant} />
+            {(item.metadata.text_description) && (
+              <>
+                <span className="text-small-regular text-gray-700">Description: {item.metadata.text_description}</span>
+              </>
+            )}
           </div>
           <NativeSelect
             value={item.quantity}

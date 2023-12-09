@@ -16,6 +16,7 @@ import { useSearchParams } from "next/navigation"
 interface VariantInfoProps {
   variantId: string
   quantity: number
+  metadata?: Record<string, unknown>
 }
 
 interface LineInfoProps {
@@ -243,14 +244,17 @@ export const StoreProvider = ({ children }: StoreProps) => {
   const addItem = ({
     variantId,
     quantity,
+    metadata,
   }: {
     variantId: string
     quantity: number
+    metadata?: Record<string, unknown>
   }) => {
     addLineItem.mutate(
       {
         variant_id: variantId,
         quantity: quantity,
+        metadata: metadata,
       },
       {
         onSuccess: ({ cart }) => {

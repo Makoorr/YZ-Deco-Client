@@ -6,14 +6,13 @@ import OptionSelect from "@modules/products/components/option-select"
 import clsx from "clsx"
 import Link from "next/link"
 import React, { useMemo } from "react"
-import { Product } from "types/medusa"
 
 type ProductActionsProps = {
-  product: PricedProduct
+  product: PricedProduct & { has_text: boolean, has_image: boolean }
 }
 
 const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
-  const { updateOptions, addToCart, options, inStock, variant } =
+  const { updateOptions, addToCart, textDescriptionRef, errorRef, options, inStock, variant } =
     useProductActions()
 
   const price = useProductPrice({ id: product.id!, variantId: variant?.id })
@@ -55,6 +54,27 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
         </div>
       )}
 
+      {(product.has_text || product.has_image) && (
+        <>
+          <span className="text-base font-medium mb-1">Description pour personalisation</span>
+          <div className="flex flex-col gap-y-1">
+            {(product.has_text) && (
+              <>
+                <span className="text-base-semi">Description par texte</span>
+                <textarea ref={textDescriptionRef} className="border rounded-md bg-gray-100 resize-none outline-none px-3 h-20" />
+              </>
+            )}
+            {(product.has_image) && (
+              <>
+                <span className="text-base-semi">Description par image</span>
+                <div className="border rounded-md p-3 bg-gray-100">
+                  <input type="file" name={"imageDescription"} /> {/* Upload to back -> Upload to s3 -> back updates metadata with link url */}
+                </div>
+              </>
+            )}
+          </div>
+      </> )}
+
       <div className="mb-4">
         {selectedPrice ? (
           <div className="flex flex-col text-gray-700">
@@ -84,9 +104,11 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
         )}
       </div>
 
+
       <Button onClick={addToCart}>
         {!inStock ? "Rupture de stock" : "Ajouter au panier"}
       </Button>
+      <div ref={errorRef} className="text-red-400 font-medium"></div>
     </div>
   )
 }

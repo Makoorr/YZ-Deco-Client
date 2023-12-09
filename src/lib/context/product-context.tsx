@@ -9,11 +9,13 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react"
 import { Variant } from "types/medusa"
 import { useStore } from "./store-context"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
+import { update } from "lodash"
 
 interface ProductContext {
   formattedPrice: string
@@ -23,6 +25,8 @@ interface ProductContext {
   variant?: Variant
   maxQuantityMet: boolean
   options: Record<string, string>
+  textDescriptionRef: React.MutableRefObject<any>
+  errorRef: React.MutableRefObject<any>
   updateOptions: (options: Record<string, string>) => void
   increaseQuantity: () => void
   decreaseQuantity: () => void
@@ -42,6 +46,8 @@ export const ProductProvider = ({
 }: ProductProviderProps) => {
   const [quantity, setQuantity] = useState<number>(1)
   const [options, setOptions] = useState<Record<string, string>>({})
+  const textDescriptionRef = useRef<HTMLTextAreaElement>();
+  const errorRef = useRef<HTMLTextAreaElement>();
   const [maxQuantityMet, setMaxQuantityMet] = useState<boolean>(false)
   const [inStock, setInStock] = useState<boolean>(true)
 
@@ -122,11 +128,28 @@ export const ProductProvider = ({
   }
 
   const addToCart = () => {
+    let metadataObject = {};
     if (variant) {
+      if(textDescriptionRef.current != (undefined || null) ){
+        metadataObject = {
+          text_description: textDescriptionRef.current.value
+        }
+        console.log(metadataObject);
+      }
+
+      // if image description is not empty add to metadataObject
+
       addItem({
         variantId: variant.id,
         quantity,
+        metadata: { ...metadataObject },
       })
+    } else {
+      // Show error for 5seconds only
+      (errorRef.current) ? errorRef.current.innerText = "Veuillez choisir les options" : null;
+      setTimeout(() => {
+        (errorRef.current) ? errorRef.current.innerText = "" : null;
+      }, 5000);
     }
   }
 
@@ -157,6 +180,8 @@ export const ProductProvider = ({
         maxQuantityMet,
         disabled,
         inStock,
+        textDescriptionRef,
+        errorRef,
         options,
         variant,
         addToCart,
