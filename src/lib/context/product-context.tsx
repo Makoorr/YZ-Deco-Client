@@ -16,6 +16,7 @@ import { Variant } from "types/medusa"
 import { useStore } from "./store-context"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { update } from "lodash"
+import medusaRequest from "../medusa-fetch"
 
 interface ProductContext {
   formattedPrice: string
@@ -26,6 +27,7 @@ interface ProductContext {
   maxQuantityMet: boolean
   options: Record<string, string>
   textDescriptionRef: React.MutableRefObject<any>
+  imageDescriptionRef: React.MutableRefObject<any>
   errorRef: React.MutableRefObject<any>
   updateOptions: (options: Record<string, string>) => void
   increaseQuantity: () => void
@@ -47,6 +49,7 @@ export const ProductProvider = ({
   const [quantity, setQuantity] = useState<number>(1)
   const [options, setOptions] = useState<Record<string, string>>({})
   const textDescriptionRef = useRef<HTMLTextAreaElement>();
+  const imageDescriptionRef = useRef<HTMLInputElement>();
   const errorRef = useRef<HTMLTextAreaElement>();
   const [maxQuantityMet, setMaxQuantityMet] = useState<boolean>(false)
   const [inStock, setInStock] = useState<boolean>(true)
@@ -127,7 +130,11 @@ export const ProductProvider = ({
     setOptions({ ...options, ...update })
   }
 
-  const addToCart = () => {
+  async function fetchImageUrl(formData: FormData) {
+    
+  }
+
+  const addToCart = async () => {
     let metadataObject = {};
     if (variant) {
       if(textDescriptionRef.current != (undefined || null) ){
@@ -136,14 +143,35 @@ export const ProductProvider = ({
         }
         console.log(metadataObject);
       }
+      
+      if(imageDescriptionRef.current != (undefined || null) ){
+        try {
+          const formData = new FormData();
+          (imageDescriptionRef.current.files) ? formData.append('file', imageDescriptionRef.current.files[0]) : null;
+          
+          const response = await fetch('your-backend-api-endpoint', {
+            method: 'POST',
+            body: formData,
+          });
+      
+          if (response.ok) {
+            const result = await response.json();
+            console.log('File uploaded successfully:', result.imageUrl);
+          } else {
+            console.error('File upload failed:', response.statusText);
+          }
 
-      // if image description is not empty add to metadataObject
+        } catch (error) {
+          console.error('An error occurred during file upload:', error);
+        }
+      }
+      
 
-      addItem({
-        variantId: variant.id,
-        quantity,
-        metadata: { ...metadataObject },
-      })
+      // addItem({
+      //   variantId: variant.id,
+      //   quantity,
+      //   metadata: { ...metadataObject },
+      // })
     } else {
       // Show error for 5seconds only
       (errorRef.current) ? errorRef.current.innerText = "Veuillez choisir les options" : null;
@@ -181,6 +209,7 @@ export const ProductProvider = ({
         disabled,
         inStock,
         textDescriptionRef,
+        imageDescriptionRef,
         errorRef,
         options,
         variant,

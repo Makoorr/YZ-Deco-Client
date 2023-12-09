@@ -4,7 +4,7 @@ import React from "react"
 import { Product } from "types/medusa"
 
 type ProductInfoProps = {
-  product: PricedProduct
+  product: PricedProduct & { has_text: boolean, has_image: boolean }
 }
 
 const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {

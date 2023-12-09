@@ -11,7 +11,7 @@ import MobileActions from "../components/mobile-actions"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 
 type ProductTemplateProps = {
-  product: PricedProduct
+  product: PricedProduct & { has_text: boolean, has_image: boolean }
 }
 
 const ProductTemplate: React.FC<ProductTemplateProps> = ({ product }) => {
