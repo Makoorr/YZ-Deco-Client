@@ -12,7 +12,7 @@ type ProductActionsProps = {
 }
 
 const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
-  const { updateOptions, addToCart, textDescriptionRef, errorRef, options, inStock, variant } =
+  const { updateOptions, addToCart, textDescriptionRef, imageDescriptionRef, errorRef, options, inStock, variant } =
     useProductActions()
 
   const price = useProductPrice({ id: product.id!, variantId: variant?.id })
@@ -67,8 +67,8 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
             {(product.has_image) && (
               <>
                 <span className="text-base-semi">Description par image</span>
-                <div className="border rounded-md p-3 bg-gray-100">
-                  <input type="file" name={"imageDescription"} /> {/* Upload to back -> Upload to s3 -> back updates metadata with link url */}
+                <div className="border rounded-md p-3 bg-gray-100 overflow-hidden">
+                  <input ref={imageDescriptionRef} type="file" name={"imageDescription"} />
                 </div>
               </>
             )}
@@ -105,8 +105,9 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
       </div>
 
 
-      <Button onClick={addToCart}>
+      <Button onClick={(event) => addToCart(event)}>
         {!inStock ? "Rupture de stock" : "Ajouter au panier"}
+
       </Button>
       <div ref={errorRef} className="text-red-400 font-medium"></div>
     </div>
