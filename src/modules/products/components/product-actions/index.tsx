@@ -37,7 +37,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
 
       <p className="text-base-regular">{product.description}</p>
 
-      {product.variants.length > 1 && (
+      {(product.variants.length) ? (
         <div className="my-8 flex flex-col gap-y-6">
           {(product.options || []).map((option) => {
             return (
@@ -52,9 +52,9 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
             )
           })}
         </div>
-      )}
+      ) : null}
 
-      {(product.has_text || product.has_image) && (
+      {(product.has_text || product.has_image) ? (
         <>
           <span className="text-base font-medium mb-1">Description pour personalisation</span>
           <div className="flex flex-col gap-y-1">
@@ -73,7 +73,8 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
               </>
             )}
           </div>
-      </> )}
+        </> 
+      ) : null}
 
       <div className="mb-4">
         {selectedPrice ? (
