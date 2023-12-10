@@ -16,6 +16,8 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
     useProductActions()
 
   const price = useProductPrice({ id: product.id!, variantId: variant?.id })
+  console.log("variants", product.variants)
+  console.log("customs", { has_text: product.has_text, has_image: product.has_image })
 
   const selectedPrice = useMemo(() => {
     const { variantPrice, cheapestPrice } = price
@@ -52,7 +54,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
             )
           })}
         </div>
-      ) : null}
+      ) : <></>}
 
       {(product.has_text || product.has_image) ? (
         <>
@@ -74,7 +76,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
             )}
           </div>
         </> 
-      ) : null}
+      ) : <></>}
 
       <div className="mb-4">
         {selectedPrice ? (
