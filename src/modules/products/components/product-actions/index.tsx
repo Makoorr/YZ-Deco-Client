@@ -5,20 +5,35 @@ import Button from "@modules/common/components/button"
 import OptionSelect from "@modules/products/components/option-select"
 import clsx from "clsx"
 import Link from "next/link"
-import React, { useMemo } from "react"
+import React, { useEffect, useMemo, useState } from "react"
+import { CustomOptions } from "../custom-options"
+import medusaRequest from "../../../../lib/medusa-fetch"
 
 type ProductActionsProps = {
-  product: PricedProduct & { has_text: boolean, has_image: boolean }
+  product: PricedProduct
 }
 
 const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
   const { updateOptions, addToCart, textDescriptionRef, imageDescriptionRef, errorRef, options, inStock, variant } =
     useProductActions()
+  
+  const [customText, setCustomText] = useState<boolean>(false)
+  const [customImage, setCustomImage] = useState<boolean>(false)
+
+  const fetchCustomProduct = async () => {
+    const res = await medusaRequest("GET", `/customizedproduct/${product.id}`)
+    if (res.ok) {
+      setCustomText(res.body[0].has_text)
+      setCustomImage(res.body[0].has_image)
+    }
+  }
+
+  useEffect(() => {
+    fetchCustomProduct()
+  }, [])
 
   const price = useProductPrice({ id: product.id!, variantId: variant?.id })
-  console.log("variants", product.variants)
-  console.log("customs", { has_text: product.has_text, has_image: product.has_image })
-
+  
   const selectedPrice = useMemo(() => {
     const { variantPrice, cheapestPrice } = price
 
@@ -55,28 +70,17 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
           })}
         </div>
       ) : <></>}
-
-      {(product.has_text || product.has_image) ? (
-        <>
-          <span className="text-base font-medium mb-1">Description pour personalisation</span>
-          <div className="flex flex-col gap-y-1">
-            {(product.has_text) && (
-              <>
-                <span className="text-base-semi">Description par texte</span>
-                <textarea ref={textDescriptionRef} className="border rounded-md bg-gray-100 resize-none outline-none px-3 h-20" />
-              </>
-            )}
-            {(product.has_image) && (
-              <>
-                <span className="text-base-semi">Description par image</span>
-                <div className="border rounded-md p-3 bg-gray-100 overflow-hidden">
-                  <input ref={imageDescriptionRef} type="file" name={"imageDescription"} />
-                </div>
-              </>
-            )}
-          </div>
-        </> 
-      ) : <></>}
+      
+      {(customText || customImage) && (
+        <CustomOptions
+          textDescriptionRef={textDescriptionRef}
+          imageDescriptionRef={imageDescriptionRef}
+          customProduct={{
+            has_text: customText,
+            has_image: customImage
+          }}
+        />
+      )}
 
       <div className="mb-4">
         {selectedPrice ? (
