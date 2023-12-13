@@ -348,10 +348,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
             resetCart()
             push(payUrl)
           })
-          .catch((error) => {
-            console.log(error)
-            alert("Erreur lors du paiement")
-          })
+          .catch((error) => {})
       },
     })
   }
