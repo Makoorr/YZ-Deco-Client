@@ -46,8 +46,8 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
   }
 
   return (
-    <div className="p-10 border-b border.gray-200 flex flex-row justify-between">
-      <div>
+    <div className="p-10 border-b border.gray-200 flex md:flex-row flex-col justify-between">
+      <div className="truncate">
         <span className="text-gray-700 text-small-regular uppercase">
           Votre commande a bien été passée.
         </span>
@@ -59,20 +59,17 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
         </div>
       </div>
       {showStatus && (
-        <div className="flex flex-col gap-2 px-5 items-center h-full">
-          <div className="flex flex-row gap-4 px-5 items-center h-full">
+        <div className="flex flex-col gap-1 md:gap-2 md:px-5 md:items-center h-full">
+          <div className="flex flex-row gap-1 md:gap-4 items-center h-full">
               <h1 className="text-gray-700 text-small-regular font-medium uppercase">Etat de la commande: </h1>
               <span>{formatStatus(order.payment_status)}</span>
           </div>
-          <div className="flex flex-row gap-4 px-5 items-center h-full">
               {(order.payment_status.toString() !== "captured") && (
-                <>
-                  <br></br>
+                <div className="flex flex-row gap-1 md:gap-4 items-center h-full">
                   <h1 className="text-gray-700 text-small-regular font-medium uppercase">Etat de la livraison: </h1>
                   <span>{formatFullfilmentStatus(order.fulfillment_status)}</span>
-                </>
+                </div>
               )}
-          </div>
         </div>
       )}
     </div>
