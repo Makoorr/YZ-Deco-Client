@@ -7,7 +7,7 @@ const CollectionShowcase = () => {
     const { data } = useShowcaseCollections();
 
     return (
-        <div className="content-container py-12">
+        <div className="content-container py-4">
             <Showcase
                 content={data}
             />

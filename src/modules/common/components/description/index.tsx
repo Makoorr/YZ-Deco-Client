@@ -15,7 +15,7 @@ const Description = (props: Props) => {
         >
         <div className={styles.blockquoteWrapper + " flex flex-row content-center justify-center"}>
             <div className={"flex self-center justify-center"}>
-                <div className={styles.blockquoteCol + " " + styles.blockquote + " bg-gradient-to-r from-purple-700 via-pink-600 to-orange-400 flex-col flex justify-center"}>
+                <div className={styles.blockquoteCol + " " + styles.blockquote + " bg-gradient-to-r from-purple-600 from-10% via-pink-600 via-40% to-orange-400 flex-col flex justify-center"}>
                     <Quote
                         className={styles.quotes}
                     />

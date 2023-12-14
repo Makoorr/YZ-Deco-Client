@@ -14,29 +14,9 @@ const Home = () => {
   return (
     <div>
       <Hero />
-      <hr className="xsmall:mt-8 mt-4"
-        style={{
-          borderTop: "3px solid #00000020",
-        }}
-      ></hr>
       <FeaturedProducts />
-      <hr className="xsmall:mb-8 mb-4"
-        style={{
-          borderTop: "3px solid #00000020",
-        }}
-      ></hr>
       <TextDescription />
-      <hr className="xsmall:mb-8 mb-4"
-        style={{
-          borderTop: "3px solid #00000020",
-        }}
-      ></hr>
       <CollectionShowcase />
-      <hr className="xsmall:mb-8 mb-4"
-        style={{
-          borderTop: "3px solid #00000020",
-        }}
-      ></hr>
     </div>
   )
 }

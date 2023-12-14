@@ -9,17 +9,18 @@ const FeaturedProducts = () => {
 
   return (
     <div>
-      <div className="bg-zinc-200 my-6 border-1 rounded-md shadow-lg content-container py-12">
-        <div className="flex flex-col items-center text-center mb-16">
-          <span className="text-base-regular text-gray-600 mb-6">
-          Derniers produits
-          </span>
-          <p className="text-2xl-regular text-gray-900 max-w-lg mb-4">
+      <div className="bg-gradient-to-r from-purple-500 from-10% via-pink-500 via-40% to-orange-300 my-6 border-1 rounded-md shadow-lg content-container py-6">
+        <div className="flex flex-col items-center text-center mb-4">
+          <p className="text-xl-semi text-white max-w-xl mb-4">
           Nos nouveaux styles sont là pour vous aider à être à votre meilleur.
           </p>
+        </div>
+        <div className="text-white">
+          <Carousel content={data} />
+        </div>
+        <div className="flex justify-center mt-2 text-white font-bold">
           <UnderlineLink href="/store">Explorer nos produits</UnderlineLink>
         </div>
-        <Carousel content={data} />
       </div>
     </div>
   )
