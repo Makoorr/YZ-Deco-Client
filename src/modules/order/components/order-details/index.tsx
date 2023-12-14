@@ -1,4 +1,4 @@
-import { Order } from "@medusajs/medusa"
+import { Order, PaymentStatus } from "@medusajs/medusa"
 
 type OrderDetailsProps = {
   order: Order
@@ -9,10 +9,40 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
   const items = order.items.reduce((acc, i) => acc + i.quantity, 0)
 
   const formatStatus = (str: string) => {
-    if(str === "captured")
-      return <span className="font-medium text-green-600">Payé ●</span>
-    else
-      return <span className="font-medium text-red-600">Non Payé ●</span>
+    switch (str) {
+      case "captured":
+        return <span className="font-medium text-green-600">Payé ●</span>
+      case "awaiting":
+      case "canceled":
+      case "partially_refunded":
+      case "not_paid":
+      case "refunded":
+      case "requires_action":
+      default:
+        return <span className="font-medium text-red-600">Non Payé ●</span>
+    }
+  }
+  
+  const formatFullfilmentStatus = (str: string) => {      
+    switch (str){
+      case "not_fulfilled":
+        return <span className="font-medium text-red-600">Non Livrée ●</span>;
+      case "partially_fulfilled":
+        return <span className="font-medium text-red-400">Livrée en partie ●</span>;
+      case "fulfilled":
+        return <span className="font-medium text-green-600">Livrée ●</span>
+      case "partially_shipped":
+        return <span className="font-medium text-red-400">Livrée en partie ●</span>;
+      case "shipped":
+        return <span className="font-medium text-red-400">Livrée en partie ●</span>;
+      case "canceled":
+        return <span className="font-medium text-red-600">Annulée ●</span>;
+      case "partially_returned":
+      case "returned":
+      case "requires_action":
+      default:
+        return <span className="font-medium text-red-600">Non Livrée ●</span>;
+    }
   }
 
   return (
@@ -29,9 +59,20 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
         </div>
       </div>
       {showStatus && (
-        <div className="flex flex-row gap-4 px-5 items-center h-full">
-            <h1 className="text-gray-700 text-small-regular font-medium uppercase">Etat de la commande: </h1>
-            <span>{formatStatus(order.payment_status)}</span>
+        <div className="flex flex-col gap-2 px-5 items-center h-full">
+          <div className="flex flex-row gap-4 px-5 items-center h-full">
+              <h1 className="text-gray-700 text-small-regular font-medium uppercase">Etat de la commande: </h1>
+              <span>{formatStatus(order.payment_status)}</span>
+          </div>
+          <div className="flex flex-row gap-4 px-5 items-center h-full">
+              {(order.payment_status.toString() !== "captured") && (
+                <>
+                  <br></br>
+                  <h1 className="text-gray-700 text-small-regular font-medium uppercase">Etat de la livraison: </h1>
+                  <span>{formatFullfilmentStatus(order.fulfillment_status)}</span>
+                </>
+              )}
+          </div>
         </div>
       )}
     </div>
