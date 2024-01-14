@@ -11,7 +11,7 @@ const FooterNav = () => {
 
   return (
     <>
-      <div className="bg-gray-300 xl:px-96 px-4 pt-4 pb-16 h-80 flex gap-2 justify-between">
+      <div className="bg-gray-300 xl:px-96 p-4 h-64 flex gap-2 justify-between">
         <div className="flex flex-col gap-1 justify-center items-center">
           <Image
               src="/secure_payment.png"
