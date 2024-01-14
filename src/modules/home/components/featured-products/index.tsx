@@ -15,7 +15,7 @@ const FeaturedProducts = () => {
           Nos nouveaux styles sont là pour vous aider à être à votre meilleur.
           </p>
         </div>
-        <div className="text-white">
+        <div>
           <Carousel content={data} />
         </div>
         <div className="flex justify-center mt-2 text-white font-bold">
