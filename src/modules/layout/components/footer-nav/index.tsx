@@ -11,7 +11,7 @@ const FooterNav = () => {
 
   return (
     <>
-      <div className="bg-gray-300 md:px-48 px-4 py-8 flex gap-4 justify-between">
+      <div className="bg-gray-300 xl:px-96 px-4 pt-4 pb-16 h-80 flex gap-2 justify-between">
         <div className="flex flex-col gap-2">
           <Image
               src="/secure_payment.png"
@@ -24,7 +24,7 @@ const FooterNav = () => {
                 width: "100%",
               }}
             />
-          <span className="px-4 font-medium">
+          <span className="px-2 font-medium">
             Paiement 100% Sécurisé
           </span>
         </div>
@@ -41,7 +41,7 @@ const FooterNav = () => {
                 width: "100%",
               }}
             />
-          <span className="px-4 font-medium">
+          <span className="px-2 font-medium">
             Guarantie de Livraison
           </span>
         </div>
@@ -58,7 +58,7 @@ const FooterNav = () => {
                 width: "100%",
               }}
             />
-          <span className="px-4 font-medium">
+          <span className="px-2 font-medium">
             Retours Positives 100.000+
           </span>
         </div>
