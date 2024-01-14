@@ -9,6 +9,7 @@ const ProductPreview = ({
   handle,
   thumbnail,
   price,
+  voirplus,
 }: ProductPreviewType) => {
   return (
     <Link href={`/products/${handle}`}>
@@ -38,7 +39,7 @@ const ProductPreview = ({
               )}
             </div>
           </div>
-          <div>
+          <div className={voirplus != false ? "" : "hidden"}>
               <Button variant="secondary" className="border-1 rounded-md border-black">Voir Plus</Button>
             </div>
         </div>

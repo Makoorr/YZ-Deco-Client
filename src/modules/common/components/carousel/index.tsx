@@ -72,7 +72,7 @@ export const Carousel = (content: any) => {
         {data
           ? data.map((product: any) => (
                 <li key={product.id}>
-                  <ProductPreview {...product}/>
+                  <ProductPreview voirplus={content.voirplus} {...product}/>
                 </li>
             ))
           : (

@@ -16,7 +16,7 @@ const FeaturedProducts = () => {
           </p>
         </div>
         <div>
-          <Carousel content={data} />
+          <Carousel voirplus={false} content={data} />
         </div>
         <div className="flex justify-center mt-2 text-white font-bold">
           <UnderlineLink href="/store">Explorer nos produits</UnderlineLink>
