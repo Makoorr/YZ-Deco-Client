@@ -5,7 +5,7 @@ import ArrowRight from "../../../common/icons/arrow-right";
 
 const EventHero = () => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-7 my-4 md:my-16 overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-7 my-4 md:my-8 overflow-hidden">
             
             <div className="col-span-3 flex items-center flex-col md:gap-16 gap-8 bg-red-100 px-8 pb-8 pt-8 md:pt-32 mx-16 my-0 md:mx-0 md:my-16 shadow-xl rounded-md">
                 <div className="flex flex-col items-center">
