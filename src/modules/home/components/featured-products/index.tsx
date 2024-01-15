@@ -9,16 +9,16 @@ const FeaturedProducts = () => {
 
   return (
     <div>
-      <div className="bg-gradient-to-r from-purple-500 from-10% via-pink-500 via-40% to-orange-300 my-6 border-1 rounded-md shadow-lg content-container py-6">
+      <div className="bg-gradient-to-r from-purple-500/75 from-10% via-pink-500/75 via-40% to-orange-300/75 p-8 my-12"> {/*  my-6 border-1 rounded-md shadow-lg content-container py-6 */}
         <div className="hidden lg:flex flex-col items-center text-center mb-4">
-          <p className="text-xl-semi text-white max-w-xl mb-4">
+          <p className="text-xl-semi max-w-xl mb-4">
           Nos nouveaux styles sont là pour vous aider à être à votre meilleur.
           </p>
         </div>
         <div>
           <Carousel voirplus={false} content={data} />
         </div>
-        <div className="flex justify-center mt-2 text-white font-bold">
+        <div className="flex justify-center mt-2 font-bold">
           <UnderlineLink href="/store">Explorer nos produits</UnderlineLink>
         </div>
       </div>

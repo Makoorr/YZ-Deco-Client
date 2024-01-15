@@ -8,6 +8,7 @@ const CollectionShowcase = () => {
 
     return (
         <div className="content-container py-4">
+            <h1 className="font-medium text-4xl my-8">Nos Categories</h1>
             <Showcase
                 content={data}
             />

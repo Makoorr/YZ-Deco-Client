@@ -15,9 +15,9 @@ const Home = () => {
   return (
     <div>
       <Hero />
-      <EventHero />
       <FeaturedProducts />
-      <TextDescription />
+      <EventHero />
+      {/* <TextDescription /> */}
       <CollectionShowcase />
     </div>
   )
