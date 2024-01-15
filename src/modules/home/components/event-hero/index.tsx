@@ -16,7 +16,7 @@ const EventHero = () => {
                 <div className="flex flex-col justify-center tracking-normal font-normal leading-relaxed text-2xl">
                     <p>Exprimez <strong>votre amour</strong> avec une touche personnalisée de YZDeco.</p>
                     <p className="hidden md:block">Découvrez notre gamme de <strong>bijoux personnalisés</strong>, trouvez la pièce parfaite <strong>pour symboliser</strong> votre lien unique.</p>
-                    <p className="hidden md:block"><strong>Avec YZDeco</strong>, votre histoire d'amour devient <strong>un beau souvenir</strong>.</p>
+                    <p className="hidden md:block"><strong>Avec YZDeco</strong>, votre histoire d&apos;amour devient <strong>un beau souvenir</strong>.</p>
                 </div>
                 
                 <div className="flex text-white bg-black w-fit shadow-2xl rounded-2xl px-6 pb-1 self-center scale-90 sm:scale-125 lg:scale-120 drop-shadow-2xl">
