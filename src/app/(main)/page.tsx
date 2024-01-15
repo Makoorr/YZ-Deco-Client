@@ -3,6 +3,7 @@ import FeaturedProducts from "@modules/home/components/featured-products"
 import Hero from "@modules/home/components/hero"
 import TextDescription from "@modules/home/components/text-description"
 import { Metadata } from "next"
+import EventHero from "../../modules/home/components/event-hero"
 
 export const metadata: Metadata = {
   title: "Acceuil",
@@ -14,6 +15,7 @@ const Home = () => {
   return (
     <div>
       <Hero />
+      <EventHero />
       <FeaturedProducts />
       <TextDescription />
       <CollectionShowcase />
